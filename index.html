@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Oops! — Make mistakes. Make progress.</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;color:#30283a;background:#fffafd;line-height:1.7}
+header{padding:18px 6%;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;background:white;border-bottom:1px solid #eadfe9}
+.logo{font-size:30px;font-weight:800}
+main{max-width:900px;margin:auto;padding:28px 20px}
+.hero{background:#fce8f1;padding:35px 25px;border-radius:22px}
+h1{font-size:clamp(38px,7vw,64px);line-height:1.15}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px}
+.card{background:white;border:1px solid #e5dbe8;border-radius:16px;padding:20px;margin-top:18px}
+button{padding:11px 16px;background:#57406c;color:white;border:2px solid #57406c;border-radius:10px;cursor:pointer;font-size:16px}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #d35b9b;outline-offset:4px}
+a{color:#57406c}
+label{display:block;padding:10px;margin:10px 0;border:1px solid #c9bdcf;border-radius:9px}
+body.accessible{background:white;color:#111;font-size:20px;line-height:1.9}
+body.accessible .hero,body.accessible .card{background:white;border:2px solid #333}
+body.accessible button{background:#111;border-color:#111;color:white}
+body.accessible a{color:#003f8c}
+.skip{position:absolute;left:-9999px;top:0;background:white;padding:10px}
+.skip:focus{left:10px;z-index:5}
+footer{text-align:center;padding:25px}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header>
+<a href="#home" style="color:inherit;text-decoration:none"><span class="logo">Oops!</span></a>
+<button id="mode" type="button" aria-pressed="false">Switch to Accessible Mode</button>
+</header>
+<main id="main">
+<section class="hero" id="home">
+<p>YOUR ENGLISH LEARNING SPACE</p>
+<h1>Oops!<br>Make mistakes.<br>Make progress.</h1>
+<p>Learn from your mistakes. Build your English, one step at a time.</p>
+<a href="#practice">Start learning ↓</a>
+</section>
+<section aria-labelledby="explore">
+<h2 id="explore">Explore your learning space</h2>
+<div class="grid">
+<article class="card"><h3>Error Detective</h3><p>Find mistakes and learn from them.</p><a href="#practice">Try a question</a></article>
+<article class="card"><h3>Vocabulary Lab</h3><p>Build vocabulary with meanings and examples.</p><p>Coming soon</p></article>
+<article class="card"><h3>Grammar Lab</h3><p>Learn grammar rules and practise.</p><p>Coming soon</p></article>
+<article class="card"><h3>Accessible Library</h3><p>Explore structured learning resources.</p><p>Coming soon</p></article>
+</div>
+</section>
+<section class="card" id="practice">
+<h2>Error Detective: A1 Grammar</h2>
+<p>Choose the correct sentence.</p>
+<form id="quiz">
+<label><input type="radio" name="answer" value="a" required> She go to school every day.</label>
+<label><input type="radio" name="answer" value="b"> She goes to school every day.</label>
+<label><input type="radio" name="answer" value="c"> She going to school every day.</label>
+<button type="submit">Check answer</button>
+</form>
+<p id="feedback" role="status" aria-live="polite"></p>
+</section>
+</main>
+<footer>Oops! — Make mistakes. Make progress.</footer>
+<script>
+const mode=document.getElementById("mode");
+mode.addEventListener("click",()=>{
+const enabled=document.body.classList.toggle("accessible");
+mode.setAttribute("aria-pressed",String(enabled));
+mode.textContent=enabled?"Switch to Normal Mode":"Switch to Accessible Mode";
+});
+document.getElementById("quiz").addEventListener("submit",event=>{
+event.preventDefault();
+const answer=new FormData(event.currentTarget).get("answer");
+document.getElementById("feedback").textContent=answer==="b"
+?"Correct! With she, use goes in the present simple."
+:"Not quite. The correct answer is: She goes to school every day.";
+});
+</script>
+</body>
+</html>
