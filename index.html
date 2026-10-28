@@ -46,7 +46,30 @@ footer{text-align:center;padding:25px}
 <div class="grid">
 <article class="card"><h3>Error Detective</h3><p>Find mistakes and learn from them.</p><a href="#practice">Try a question</a></article>
 <article class="card"><h3>Vocabulary Lab</h3><p>Build vocabulary with meanings and examples.</p><p>Coming soon</p></article>
-<article class="card"><h3>Grammar Lab</h3><p>Learn grammar rules and practise.</p><p>Coming soon</p></article>
+<article class="card" id="grammar">
+  <h3>Grammar Lab</h3>
+  <p>Learn grammar rules and practise.</p>
+
+  <label for="grammar-level">Choose your level</label>
+  <select id="grammar-level">
+    <option value="A1">A1 — Beginner</option>
+    <option value="A2">A2 — Elementary</option>
+  </select>
+
+  <label for="grammar-topic">Choose a topic</label>
+  <select id="grammar-topic">
+    <option value="present-simple">Present Simple</option>
+    <option value="present-continuous">Present Continuous</option>
+  </select>
+
+  <div id="grammar-lesson" aria-live="polite">
+    <h4>Present Simple</h4>
+    <p><strong>Use:</strong> Habits, routines and general facts.</p>
+    <p><strong>Form:</strong> Subject + base verb. Add -s/-es with he, she or it.</p>
+    <p><strong>Example:</strong> She goes to school every day.</p>
+    <p><strong>Common mistake:</strong> She go to school.</p>
+  </div>
+</article>
 <article class="card"><h3>Accessible Library</h3><p>Explore structured learning resources.</p><p>Coming soon</p></article>
 </div>
 </section>
@@ -77,6 +100,46 @@ document.getElementById("feedback").textContent=answer==="b"
 ?"Correct! With she, use goes in the present simple."
 :"Not quite. The correct answer is: She goes to school every day.";
 });
+const grammarTopic = document.getElementById("grammar-topic");
+const grammarLesson = document.getElementById("grammar-lesson");
+const grammarLevel = document.getElementById("grammar-level");
+
+const grammarLessons = {
+  "present-simple": {
+    title: "Present Simple",
+    use: "Habits, routines and general facts.",
+    form: "Positive: Subject + base verb. Add -s/-es with he, she or it.",
+    example: "She goes to school every day.",
+    mistake: "She go to school.",
+    tip: "Remember to add -s or -es after he, she and it."
+  },
+  "present-continuous": {
+    title: "Present Continuous",
+    use: "Actions happening now or around the present time.",
+    form: "Subject + am/is/are + verb-ing.",
+    example: "They are studying English now.",
+    mistake: "They studying English now.",
+    tip: "Do not forget am, is or are before the -ing verb."
+  }
+};
+
+function renderGrammarLesson() {
+  const lesson = grammarLessons[grammarTopic.value];
+
+  grammarLesson.innerHTML = `
+    <h4>${lesson.title}</h4>
+    <p><strong>Level:</strong> ${grammarLevel.value}</p>
+    <p><strong>Use:</strong> ${lesson.use}</p>
+    <p><strong>Form:</strong> ${lesson.form}</p>
+    <p><strong>Example:</strong> ${lesson.example}</p>
+    <p><strong>Common mistake:</strong> ${lesson.mistake}</p>
+    <p><strong>Remember:</strong> ${lesson.tip}</p>
+  `;
+}
+
+grammarTopic.addEventListener("change", renderGrammarLesson);
+grammarLevel.addEventListener("change", renderGrammarLesson);
+renderGrammarLesson();
 </script>
 </body>
 </html>
