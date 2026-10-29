@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Error Fix | Oops!</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #30243d;
+      background: #fff7fc;
+      line-height: 1.6;
+    }
+    header {
+      background: white;
+      padding: 18px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      border-bottom: 1px solid #eaddeb;
+    }
+    .logo {
+      color: #30243d;
+      font-size: 32px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+    nav { display: flex; gap: 18px; flex-wrap: wrap; }
+    nav a { color: #624674; }
+    main { max-width: 850px; margin: 48px auto; padding: 0 20px; }
+    .panel {
+      background: white;
+      border: 1px solid #eeddec;
+      border-radius: 22px;
+      padding: 30px;
+      box-shadow: 0 8px 24px #5d31510c;
+    }
+    h1 { font-size: clamp(28px, 5vw, 40px); }
+    .intro { color: #65566d; }
+    label { display: block; font-weight: bold; margin: 20px 0 8px; }
+    textarea {
+      width: 100%;
+      min-height: 150px;
+      padding: 15px;
+      font: inherit;
+      border: 1px solid #cdbbd5;
+      border-radius: 12px;
+      resize: vertical;
+    }
+    button {
+      margin-top: 16px;
+      padding: 13px 20px;
+      border: 0;
+      border-radius: 10px;
+      background: #67447b;
+      color: white;
+      font: inherit;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:focus-visible, a:focus-visible, textarea:focus-visible {
+      outline: 3px solid #df78b0;
+      outline-offset: 3px;
+    }
+    #result {
+      margin-top: 24px;
+      padding: 18px;
+      border-radius: 12px;
+      background: #f7effa;
+      overflow-wrap: anywhere;
+    }
+    .note { font-size: 14px; color: #65566d; }
+    body.accessible { background: white; color: black; font-size: 18px; }
+    body.accessible .panel, body.accessible header { border: 2px solid black; }
+    body.accessible a { color: #00008b; }
+    body.accessible button { background: black; color: white; }
+    @media (max-width: 600px) {
+      header { padding: 14px 5%; }
+      main { margin: 24px auto; }
+      .panel { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="logo" href="index.html">Oops!</a>
+    <nav aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="error-fix.html" aria-current="page">Error Fix</a>
+      <a href="grammar.html">Grammar</a>
+      <a href="vocabulary.html">Vocabulary</a>
+      <a href="progress.html">Progress</a>
+      <a href="roadmap.html">Roadmap</a>
+    </nav>
+    <button type="button" id="mode" aria-pressed="false">
+      Accessible Mode
+    </button>
+  </header>
+
+  <main>
+    <section class="panel">
+      <h1>Error Fix — Check Your English</h1>
+      <p class="intro">
+        Enter an English sentence to review its grammar and receive feedback.
+      </p>
+
+      <form id="check-form">
+        <label for="sentence">Your English sentence</label>
+        <textarea id="sentence" required
+          placeholder="Example: She go to school every day."
+          aria-describedby="check-note"></textarea>
+        <p class="note" id="check-note">
+          This starter version checks a few common patterns. It cannot reliably
+          judge every English sentence yet.
+        </p>
+        <button type="submit">Check my sentence</button>
+      </form>
+
+      <div id="result" role="status" aria-live="polite">
+        Your feedback will appear here.
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const form = document.getElementById("check-form");
+    const sentence = document.getElementById("sentence");
+    const result = document.getElementById("result");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+      const text = sentence.value.trim();
+
+      if (!text) {
+        result.textContent = "Please enter an English sentence.";
+        return;
+      }
+
+      const patterns = [
+        {
+          regex: /\bshe go\b/i,
+          correction: "She goes",
+          explanation: "In the present simple, use goes with he, she and it."
+        },
+        {
+          regex: /\bhe go\b/i,
+          correction: "He goes",
+          explanation: "In the present simple, use goes with he, she and it."
+        },
+        {
+          regex: /\bi am agree\b/i,
+          correction: "I agree",
+          explanation: "Agree is a verb, so we normally say I agree, not I am agree."
+        },
+        {
+          regex: /\bshe don't\b/i,
+          correction: "She doesn't",
+          explanation: "Use doesn't with he, she and it in present-simple negatives."
+        },
+        {
+          regex: /\bhe don't\b/i,
+          correction: "He doesn't",
+          explanation: "Use doesn't with he, she and it in present-simple negatives."
+        }
+      ];
+
+      const found = patterns.find(item => item.regex.test(text));
+
+      if (found) {
+        const corrected = text.replace(found.regex, found.correction);
+        result.replaceChildren();
+
+        const heading = document.createElement("strong");
+        heading.textContent = "A possible error was found";
+        const correctedLine = document.createElement("p");
+        correctedLine.textContent = "Suggested correction: " + corrected;
+        const explanation = document.createElement("p");
+        explanation.textContent = "Explanation: " + found.explanation;
+
+        result.append(heading, correctedLine, explanation);
+      } else {
+        result.textContent =
+          "This starter checker did not detect one of its listed error patterns. " +
+          "That does not prove the sentence is correct. A more complete language " +
+          "checker is needed to assess arbitrary sentences reliably.";
+      }
+    });
+
+    document.getElementById("mode").addEventListener("click", function() {
+      const enabled = document.body.classList.toggle("accessible");
+      this.setAttribute("aria-pressed", String(enabled));
+      this.textContent = enabled ? "Normal Mode" : "Accessible Mode";
+    });
+  </script>
+</body>
+</html>
