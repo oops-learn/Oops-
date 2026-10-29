@@ -1,0 +1,179 @@
+
+/* Oops! — Shared design system */
+:root {
+  --primary: #6c63ff;
+  --primary-soft: #eeecff;
+  --ink: #302b49;
+  --muted: #716c83;
+  --card: #ffffff;
+  --border: #e8e4f3;
+  --mint: #42c9b5;
+  --coral: #ff7a90;
+  --radius: 22px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: #faf9ff;
+  color: var(--ink);
+  font-family: "Be Vietnam Pro", system-ui, sans-serif;
+  line-height: 1.7;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+a {
+  color: var(--primary);
+}
+
+:focus-visible {
+  outline: 3px solid #ff8c00;
+  outline-offset: 4px;
+}
+
+header {
+  background: #ffffffed;
+  border-bottom: 1px solid var(--border);
+}
+
+.logo {
+  font-family: "Lexend", sans-serif;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+main {
+  width: min(1100px, 92%);
+  margin: 36px auto 60px;
+}
+
+.hero {
+  background: linear-gradient(135deg, #eeecff, #fff0f4);
+  border: 1px solid #ffffff;
+  border-radius: 26px;
+  padding: 32px;
+  margin-bottom: 26px;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Lexend", "Be Vietnam Pro", sans-serif;
+  line-height: 1.3;
+}
+
+h1 {
+  font-size: clamp(30px, 5vw, 44px);
+}
+
+.panel,
+.card,
+section.panel {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin: 20px 0;
+  box-shadow: 0 10px 30px #302b490b;
+}
+
+button,
+.primary,
+.btn {
+  border-radius: 999px;
+  transition: background .2s, transform .2s;
+}
+
+button:hover,
+.primary:hover,
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.primary,
+button.primary {
+  background: var(--primary);
+  color: #fff;
+  border: 1px solid var(--primary);
+  padding: 12px 20px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+select,
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]):not([type="file"]),
+textarea {
+  max-width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 11px 13px;
+}
+
+footer {
+  text-align: center;
+  padding: 26px;
+  color: var(--muted);
+}
+
+body.accessible {
+  background: #fff;
+  color: #000;
+  font-size: 19px;
+  line-height: 1.9;
+}
+
+body.accessible header,
+body.accessible .hero,
+body.accessible .panel,
+body.accessible .card,
+body.accessible section.panel {
+  background: #fff;
+  color: #000;
+  border: 2px solid #000;
+  box-shadow: none;
+}
+
+body.accessible a {
+  color: #000;
+  text-decoration: underline;
+}
+
+body.accessible button,
+body.accessible .primary {
+  background: #000;
+  color: #fff;
+  border: 2px solid #000;
+}
+
+@media (max-width: 600px) {
+  main {
+    width: 94%;
+    margin-top: 20px;
+  }
+
+  .hero,
+  .panel,
+  .card,
+  section.panel {
+    padding: 18px;
+    border-radius: 18px;
+  }
+
+  button,
+  .primary {
+    max-width: 100%;
+  }
+}
