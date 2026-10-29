@@ -1,0 +1,796 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grammar Lab | Oops!</title>
+  <style>
+    :root {
+      --purple: #7157e8;
+      --pink: #ff78a9;
+      --ink: #292543;
+      --muted: #716d86;
+      --paper: #ffffff;
+      --bg: #f7f5ff;
+      --border: #e8e2fa;
+      --green: #16865d;
+      --red: #c74458;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.65;
+    }
+
+    button, select {
+      font: inherit;
+    }
+
+    button, select, a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    a { color: var(--purple); }
+
+    header {
+      background: white;
+      border-bottom: 1px solid var(--border);
+      padding: 18px 6%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 900;
+      color: var(--purple);
+      text-decoration: none;
+    }
+
+    .back {
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    main {
+      width: min(1000px, 92%);
+      margin: 34px auto 60px;
+    }
+
+    .hero {
+      padding: 32px;
+      border-radius: 24px;
+      background: linear-gradient(120deg, #e8e3ff, #ffe7f0);
+      margin-bottom: 24px;
+    }
+
+    .eyebrow {
+      color: var(--purple);
+      font-size: 13px;
+      font-weight: bold;
+      letter-spacing: 1.5px;
+    }
+
+    h1 { font-size: clamp(30px, 5vw, 44px); margin: 8px 0; }
+    h2 { margin-top: 0; }
+    h3 { margin-top: 0; }
+    .muted { color: var(--muted); }
+
+    .panel {
+      background: var(--paper);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 24px;
+      margin: 20px 0;
+      box-shadow: 0 8px 24px #4430800a;
+    }
+
+    .filters {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 7px;
+    }
+
+    select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #cfc6ee;
+      border-radius: 12px;
+      background: white;
+      color: var(--ink);
+    }
+
+    .topic-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .topic {
+      border: 1px solid #d8cff8;
+      background: white;
+      border-radius: 999px;
+      padding: 9px 15px;
+      cursor: pointer;
+      color: var(--ink);
+    }
+
+    .topic[aria-pressed="true"] {
+      background: var(--purple);
+      color: white;
+      border-color: var(--purple);
+    }
+
+    .rule {
+      background: #f4f1ff;
+      padding: 16px;
+      border-left: 4px solid var(--purple);
+      border-radius: 10px;
+      margin: 14px 0;
+    }
+
+    .example {
+      background: #f0fbf6;
+      border-radius: 12px;
+      padding: 14px;
+      margin-top: 12px;
+    }
+
+    .question {
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .question:last-child { border-bottom: 0; }
+
+    .answers {
+      display: grid;
+      gap: 9px;
+      margin-top: 12px;
+    }
+
+    .answer {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 11px 13px;
+      cursor: pointer;
+    }
+
+    .answer input { margin-top: 6px; }
+
+    .primary {
+      background: var(--purple);
+      color: white;
+      border: 0;
+      padding: 12px 20px;
+      border-radius: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    .primary:hover { filter: brightness(.95); }
+
+    .feedback {
+      margin-top: 12px;
+      padding: 14px;
+      border-radius: 12px;
+      background: #f4f1ff;
+    }
+
+    .correct { color: var(--green); font-weight: bold; }
+    .incorrect { color: var(--red); font-weight: bold; }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: var(--muted);
+    }
+
+    body.accessible {
+      background: #fff;
+      color: #111;
+      font-size: 19px;
+      line-height: 1.9;
+    }
+
+    body.accessible .panel,
+    body.accessible .hero {
+      background: #fff;
+      color: #111;
+      border: 2px solid #222;
+      box-shadow: none;
+    }
+
+    body.accessible .topic,
+    body.accessible .answer,
+    body.accessible select {
+      border: 2px solid #222;
+      color: #111;
+    }
+
+    body.accessible .topic[aria-pressed="true"],
+    body.accessible .primary {
+      background: #111;
+      color: #fff;
+      border-color: #111;
+    }
+
+    body.accessible .rule,
+    body.accessible .example,
+    body.accessible .feedback {
+      background: #f0f0f0;
+      color: #111;
+      border-color: #111;
+    }
+
+    button:focus-visible,
+    select:focus-visible,
+    a:focus-visible,
+    input:focus-visible {
+      outline: 3px solid #e58a00;
+      outline-offset: 3px;
+    }
+
+    @media (max-width: 600px) {
+      .hero, .panel { padding: 20px; }
+      header { padding: 16px 4%; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="logo" href="index.html" aria-label="Oops! Home">Oops!</a>
+    <nav aria-label="Main navigation">
+      <a class="back" href="index.html">← Back to Home</a>
+    </nav>
+    <button class="primary" id="modeBtn" type="button"
+      aria-pressed="false">Switch to Accessible Mode</button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="eyebrow">OOPS! LEARNING SPACE</div>
+      <h1>Grammar Lab</h1>
+      <p>Learn the rules. Understand your mistakes. Make progress.</p>
+      <p class="muted">Choose your level, explore a grammar topic, then test your understanding.</p>
+    </section>
+
+    <section class="panel" aria-labelledby="chooseTitle">
+      <h2 id="chooseTitle">01. Choose your learning path</h2>
+      <div class="filters">
+        <div>
+          <label for="level">Your English level</label>
+          <select id="level">
+            <option value="A1">A1 — Beginner</option>
+            <option value="A2">A2 — Elementary</option>
+            <option value="B1">B1 — Intermediate</option>
+            <option value="B2">B2 — Upper-intermediate</option>
+            <option value="C1">C1 — Advanced</option>
+            <option value="C2">C2 — Proficiency</option>
+          </select>
+        </div>
+        <div>
+          <label for="topicSelect">Grammar topic</label>
+          <select id="topicSelect" aria-describedby="topicHelp"></select>
+          <span class="muted" id="topicHelp">Topics change with your selected level.</span>
+        </div>
+      </div>
+      <div class="topic-list" id="topicButtons" aria-label="Available grammar topics"></div>
+    </section>
+
+    <section class="panel" aria-labelledby="lessonTitle">
+      <h2 id="lessonTitle">02. Learn the rule</h2>
+      <div id="lesson" aria-live="polite"></div>
+    </section>
+
+    <section class="panel" aria-labelledby="practiceTitle">
+      <h2 id="practiceTitle">03. Practice time!</h2>
+      <p class="muted">Choose one answer for each question, then check your results.</p>
+      <form id="quizForm">
+        <div id="questions"></div>
+        <button class="primary" type="submit">Check my answers</button>
+        <button class="primary" id="resetBtn" type="button">Try again</button>
+      </form>
+      <div id="results" class="feedback" role="status" aria-live="polite" hidden></div>
+    </section>
+
+    <section class="panel">
+      <h2>04. Your learning progress</h2>
+      <p id="progressText">Complete a practice set to start tracking your results on this device.</p>
+      <p class="muted">This first version stores results in this browser only. It does not yet sync between devices or create student accounts.</p>
+      <button class="primary" id="clearProgress" type="button">Reset saved progress</button>
+    </section>
+  </main>
+
+  <footer>Oops! — Make mistakes. Make progress.</footer>
+
+  <script>
+    const curriculum = {
+      A1: [
+        {
+          title: "Present Simple",
+          rule: "Use the Present Simple for habits, routines, facts and general truths.",
+          form: "I/You/We/They + base verb. He/She/It + verb-s or verb-es.",
+          examples: ["I study English every day.", "She studies English every day."],
+          questions: [
+            { text: "She ___ to school every morning.", options: ["go", "goes", "going"], answer: 1, why: "With he, she or it, most Present Simple verbs take -s or -es." },
+            { text: "They ___ football on Sundays.", options: ["plays", "play", "playing"], answer: 1, why: "Use the base verb with they." },
+            { text: "___ he like music?", options: ["Do", "Does", "Is"], answer: 1, why: "Use Does + subject + base verb for questions with he, she or it." }
+          ]
+        },
+        {
+          title: "Present Continuous",
+          rule: "Use the Present Continuous for actions happening now or around the present time.",
+          form: "Subject + am/is/are + verb-ing.",
+          examples: ["I am reading now.", "They are studying English."],
+          questions: [
+            { text: "Look! The baby ___.", options: ["sleeps", "is sleeping", "sleep"], answer: 1, why: "An action happening now takes the Present Continuous." },
+            { text: "We ___ dinner at the moment.", options: ["are having", "have", "has"], answer: 0, why: "Use are + verb-ing with we." },
+            { text: "I ___ watching TV now.", options: ["am", "is", "are"], answer: 0, why: "Use am with I." }
+          ]
+        },
+        {
+          title: "Past Simple: was/were and regular verbs",
+          rule: "Use the Past Simple for completed actions or states in the past.",
+          form: "I/He/She/It was; You/We/They were. Regular verbs usually take -ed.",
+          examples: ["She was tired yesterday.", "We watched a film last night."],
+          questions: [
+            { text: "They ___ at home yesterday.", options: ["was", "were", "are"], answer: 1, why: "Use were with you, we and they." },
+            { text: "I ___ football last Sunday.", options: ["play", "played", "playing"], answer: 1, why: "A completed past action takes the Past Simple: played." },
+            { text: "He ___ very happy yesterday.", options: ["is", "were", "was"], answer: 2, why: "Use was with he, she and it." }
+          ]
+        },
+        {
+          title: "Countable and Uncountable Nouns",
+          rule: "Countable nouns can be counted individually. Uncountable nouns are not normally counted as separate units.",
+          form: "Use many with plural countable nouns; use much with uncountable nouns. Use some/any according to the sentence.",
+          examples: ["How many books do you have?", "How much water do you drink?"],
+          questions: [
+            { text: "How ___ apples do you need?", options: ["much", "many", "any"], answer: 1, why: "Apples are countable plural nouns, so use many." },
+            { text: "There isn't ___ milk left.", options: ["many", "much", "few"], answer: 1, why: "Milk is uncountable, so much is appropriate here." },
+            { text: "I have ___ friends at school.", options: ["a little", "much", "some"], answer: 2, why: "Some can be used with plural countable nouns in affirmative sentences." }
+          ]
+        },
+        {
+          title: "Personal Pronouns and Possessive Adjectives",
+          rule: "Subject pronouns replace the subject. Possessive adjectives show who something belongs to and come before a noun.",
+          form: "I → my; you → your; he → his; she → her; it → its; we → our; they → their.",
+          examples: ["She is my friend.", "They love their school."],
+          questions: [
+            { text: "Tom has a bike. ___ bike is blue.", options: ["His", "He", "Him"], answer: 0, why: "His is the possessive adjective for Tom." },
+            { text: "Mai and I love ___ school.", options: ["our", "us", "we"], answer: 0, why: "Use our before a noun to show possession." },
+            { text: "Anna is kind. ___ helps everyone.", options: ["Her", "She", "Hers"], answer: 1, why: "She is the subject pronoun." }
+          ]
+        },
+        {
+          title: "There is / There are",
+          rule: "Use there is for a singular noun or an uncountable noun, and there are for plural nouns.",
+          form: "There is + singular/uncountable noun. There are + plural noun.",
+          examples: ["There is a book on the desk.", "There are three books on the desk."],
+          questions: [
+            { text: "There ___ a cat in the garden.", options: ["are", "is", "be"], answer: 1, why: "A cat is singular, so use there is." },
+            { text: "There ___ five students in the room.", options: ["is", "are", "was"], answer: 1, why: "Five students is plural, so use there are." },
+            { text: "There ___ some water in the bottle.", options: ["is", "are", "be"], answer: 0, why: "Water is uncountable, so use there is." }
+          ]
+        },
+        {
+          title: "Imperatives",
+          rule: "Use imperatives to give instructions, directions, advice or commands.",
+          form: "Base verb + ... . Use don't + base verb for negative imperatives.",
+          examples: ["Open your book.", "Don't run in the classroom."],
+          questions: [
+            { text: "___ your name at the top.", options: ["Write", "Writes", "Writing"], answer: 0, why: "An imperative starts with the base verb." },
+            { text: "___ touch the hot pan.", options: ["Not", "Don't", "Doesn't"], answer: 1, why: "Use don't + base verb for a negative imperative." },
+            { text: "Please ___ quiet.", options: ["be", "are", "is"], answer: 0, why: "Use the base form be in this imperative." }
+          ]
+        },
+        {
+          title: "Can and Can't",
+          rule: "Use can to express ability or possibility, and can't to express inability or impossibility.",
+          form: "Subject + can/can't + base verb. Do not add -s to the verb after can.",
+          examples: ["She can swim.", "He can't drive."],
+          questions: [
+            { text: "My sister can ___ very well.", options: ["sings", "sing", "singing"], answer: 1, why: "Use the base verb after can." },
+            { text: "Birds ___ fly, but most penguins can't.", options: ["can", "are", "do"], answer: 0, why: "Can expresses ability." },
+            { text: "He ___ speak French, so he needs a translator.", options: ["can", "can't", "does"], answer: 1, why: "Can't expresses inability in this context." }
+          ]
+        },
+        {
+          title: "This, That, These and Those",
+          rule: "This and these refer to things near the speaker; that and those refer to things farther away.",
+          form: "This/that + singular noun. These/those + plural noun.",
+          examples: ["This book is new.", "Those shoes are expensive."],
+          questions: [
+            { text: "___ are my pencils here on the desk.", options: ["This", "These", "That"], answer: 1, why: "These is used for nearby plural things." },
+            { text: "Look at ___ mountain over there.", options: ["those", "these", "that"], answer: 2, why: "That refers to one thing farther away." },
+            { text: "___ is my friend standing beside me.", options: ["This", "These", "Those"], answer: 0, why: "This is used for one nearby person or thing." }
+          ]
+        },
+        {
+          title: "A, An, Some and Any",
+          rule: "Use a/an with a singular countable noun. Use some and any with plural countable or uncountable nouns in suitable contexts.",
+          form: "A before a consonant sound; an before a vowel sound. Some is common in affirmative statements; any is common in questions and negatives.",
+          examples: ["She has an umbrella.", "Do you have any questions?"],
+          questions: [
+            { text: "He ate ___ apple.", options: ["a", "an", "some"], answer: 1, why: "Apple begins with a vowel sound, so use an." },
+            { text: "We don't have ___ eggs.", options: ["some", "a", "any"], answer: 2, why: "Any is commonly used in negative sentences." },
+            { text: "Would you like ___ tea?", options: ["some", "any", "an"], answer: 0, why: "Some is often used in offers and requests." }
+          ]
+        },
+        {
+          title: "Basic Prepositions: In, On and At",
+          rule: "In, on and at are used for time and place. The correct choice depends on the expression.",
+          form: "Time: in July, on Monday, at 7 o'clock. Place: in a room, on a surface, at a point or location.",
+          examples: ["My birthday is in May.", "The lesson starts at 8 o'clock."],
+          questions: [
+            { text: "The meeting starts ___ 9 a.m.", options: ["in", "on", "at"], answer: 2, why: "Use at with a specific clock time." },
+            { text: "We have English ___ Monday.", options: ["on", "at", "in"], answer: 0, why: "Use on with days of the week." },
+            { text: "My birthday is ___ December.", options: ["at", "in", "on"], answer: 1, why: "Use in with months." }
+          ]
+        }
+      ],
+      A2: [
+        {
+          title: "Past Simple: Irregular Verbs",
+          rule: "Many common verbs have irregular past forms and do not take -ed.",
+          form: "Affirmative: subject + past form. Questions and negatives: did/didn't + base verb.",
+          examples: ["I went home early.", "Did you see the film?"],
+          questions: [
+            { text: "Yesterday, we ___ to the museum.", options: ["go", "went", "gone"], answer: 1, why: "The past form of go is went." },
+            { text: "She didn't ___ breakfast.", options: ["ate", "eaten", "eat"], answer: 2, why: "After didn't, use the base verb." },
+            { text: "___ he buy a new phone?", options: ["Did", "Does", "Was"], answer: 0, why: "Use did to form Past Simple questions." }
+          ]
+        },
+        {
+          title: "Comparatives and Superlatives",
+          rule: "Comparatives compare two people or things. Superlatives identify the highest or lowest degree in a group.",
+          form: "Short adjectives: -er / -est. Longer adjectives often use more / most. Some forms are irregular.",
+          examples: ["This bag is cheaper than that one.", "She is the most careful student in the class."],
+          questions: [
+            { text: "My room is ___ than yours.", options: ["clean", "cleaner", "cleanest"], answer: 1, why: "Use a comparative form with than." },
+            { text: "This is the ___ film I've ever seen.", options: ["better", "best", "good"], answer: 1, why: "The superlative of good is best." },
+            { text: "Maths is ___ difficult for me than science.", options: ["more", "most", "much"], answer: 0, why: "Use more + adjective for this comparison." }
+          ]
+        },
+        {
+          title: "Future: Be Going To",
+          rule: "Use be going to for plans, intentions and predictions based on present evidence.",
+          form: "Subject + am/is/are + going to + base verb.",
+          examples: ["We are going to visit Hue.", "Look at those clouds! It is going to rain."],
+          questions: [
+            { text: "They ___ going to travel next week.", options: ["is", "are", "am"], answer: 1, why: "Use are with they." },
+            { text: "I am going to ___ a new book.", options: ["buy", "buys", "buying"], answer: 0, why: "Use the base verb after going to." },
+            { text: "Look at the sky! It ___ going to rain.", options: ["is", "are", "am"], answer: 0, why: "Use is with it." }
+          ]
+        }
+      ],
+      B1: [
+        {
+          title: "Present Perfect",
+          rule: "Use the Present Perfect to connect past events with the present, including experiences and unfinished time periods.",
+          form: "Subject + have/has + past participle.",
+          examples: ["I have visited Da Nang twice.", "She has just finished her homework."],
+          questions: [
+            { text: "She ___ never tried sushi.", options: ["have", "has", "did"], answer: 1, why: "Use has with she." },
+            { text: "I have ___ my homework.", options: ["finish", "finished", "finishing"], answer: 1, why: "Use the past participle after have." },
+            { text: "Have you ___ been to London?", options: ["ever", "yet", "ago"], answer: 0, why: "Ever is commonly used to ask about life experiences." }
+          ]
+        },
+        {
+          title: "First Conditional",
+          rule: "Use the first conditional for a real or possible future situation and its result.",
+          form: "If + Present Simple, will + base verb.",
+          examples: ["If it rains, we will stay at home.", "If you study, you will improve."],
+          questions: [
+            { text: "If she studies hard, she ___ pass.", options: ["will", "would", "did"], answer: 0, why: "The main clause commonly uses will in the first conditional." },
+            { text: "If it ___ tomorrow, we'll cancel the picnic.", options: ["will rain", "rains", "rained"], answer: 1, why: "Use Present Simple in the if-clause." },
+            { text: "If I have time, I ___ call you.", options: ["will", "would have", "had"], answer: 0, why: "Use will + base verb for the likely future result." }
+          ]
+        }
+      ],
+      B2: [
+        {
+          title: "Third Conditional",
+          rule: "Use the third conditional to imagine a different past and its hypothetical result.",
+          form: "If + past perfect, would have + past participle.",
+          examples: ["If I had left earlier, I would have caught the bus.", "She would have passed if she had studied."],
+          questions: [
+            { text: "If they had booked earlier, they ___ a better price.", options: ["would get", "would have got", "will get"], answer: 1, why: "The third conditional result uses would have + past participle." },
+            { text: "If I ___ the map, I wouldn't have got lost.", options: ["checked", "had checked", "would check"], answer: 1, why: "Use past perfect in the if-clause." },
+            { text: "She would have arrived on time if she ___ earlier.", options: ["left", "would leave", "had left"], answer: 2, why: "Use past perfect to describe the unreal past condition." }
+          ]
+        },
+        {
+          title: "Passive Voice",
+          rule: "Use the passive when the action or receiver is more important than the person doing it.",
+          form: "Subject + the correct form of be + past participle.",
+          examples: ["The novel was written in 1998.", "English is spoken in many countries."],
+          questions: [
+            { text: "The windows ___ every week.", options: ["clean", "are cleaned", "cleaned"], answer: 1, why: "Present Simple passive: are + past participle." },
+            { text: "The bridge was ___ last year.", options: ["build", "built", "building"], answer: 1, why: "Passive structures use the past participle." },
+            { text: "The results ___ tomorrow.", options: ["will announce", "will be announced", "announced"], answer: 1, why: "Future passive: will be + past participle." }
+          ]
+        }
+      ],
+      C1: [
+        {
+          title: "Inversion for Emphasis",
+          rule: "Negative or restrictive expressions at the beginning of a clause can trigger subject–auxiliary inversion.",
+          form: "Negative expression + auxiliary/modal + subject + main verb.",
+          examples: ["Never have I seen such a view.", "Not only did she win, but she also broke the record."],
+          questions: [
+            { text: "Rarely ___ such dedication.", options: ["we see", "do we see", "we do see"], answer: 1, why: "Rarely at the beginning triggers inversion." },
+            { text: "Not only ___ the exam, but he also won a prize.", options: ["he passed", "did he pass", "he did pass"], answer: 1, why: "After Not only at the beginning, use auxiliary–subject inversion." },
+            { text: "Under no circumstances ___ this door.", options: ["you should open", "should you open", "you open"], answer: 1, why: "Under no circumstances requires inversion in this construction." }
+          ]
+        },
+        {
+          title: "Mixed Conditionals",
+          rule: "Mixed conditionals connect an unreal condition in one time period with a result in another.",
+          form: "A common pattern: If + past perfect, would + base verb, for a past condition with a present result.",
+          examples: ["If I had taken that job, I would live abroad now.", "If she were more organised, she wouldn't have missed the deadline."],
+          questions: [
+            { text: "If I had studied medicine, I ___ a doctor now.", options: ["would be", "would have been", "will be"], answer: 0, why: "The past condition has a present result." },
+            { text: "If he were more careful, he ___ that mistake yesterday.", options: ["wouldn't make", "wouldn't have made", "won't make"], answer: 1, why: "A present condition can explain a hypothetical past result." },
+            { text: "If they had saved more, they ___ in a bigger house now.", options: ["would live", "will live", "would have lived"], answer: 0, why: "Use would + base verb for the present result." }
+          ]
+        }
+      ],
+      C2: [
+        {
+          title: "Advanced Subjunctive Structures",
+          rule: "Formal English sometimes uses the base form of a verb after expressions of necessity, recommendation or demand.",
+          form: "It is essential that + subject + base verb. Recommend/insist/suggest that + subject + base verb can also occur in formal usage.",
+          examples: ["It is essential that every applicant be present.", "They recommended that the proposal be reconsidered."],
+          questions: [
+            { text: "It is vital that she ___ informed immediately.", options: ["is", "be", "was"], answer: 1, why: "Formal mandative subjunctive uses the base form be." },
+            { text: "The committee insisted that the report ___ revised.", options: ["is", "be", "was"], answer: 1, why: "The mandative subjunctive uses the base form after insisted that." },
+            { text: "It is important that every member ___ on time.", options: ["arrives", "arrive", "arrived"], answer: 1, why: "Formal subjunctive uses the base form arrive." }
+          ]
+        },
+        {
+          title: "Cleft Sentences",
+          rule: "Cleft sentences divide a sentence into parts to emphasise a particular piece of information.",
+          form: "It + be + emphasised element + that/who ...; What-clause + be + emphasised element.",
+          examples: ["It was Anna who solved the problem.", "What I need is a little more time."],
+          questions: [
+            { text: "It was John ___ called me last night.", options: ["which", "who", "where"], answer: 1, why: "Who refers to a person in this cleft sentence." },
+            { text: "What I need ___ a quiet place to study.", options: ["are", "be", "is"], answer: 2, why: "The what-clause functions as a singular subject here." },
+            { text: "It was the final question ___ confused everyone.", options: ["that", "who", "where"], answer: 0, why: "That introduces the identifying clause referring to a thing." }
+          ]
+        }
+      ]
+    };
+
+    const levelSelect = document.getElementById("level");
+    const topicSelect = document.getElementById("topicSelect");
+    const topicButtons = document.getElementById("topicButtons");
+    const lesson = document.getElementById("lesson");
+    const questions = document.getElementById("questions");
+    const quizForm = document.getElementById("quizForm");
+    const results = document.getElementById("results");
+    const progressText = document.getElementById("progressText");
+    const modeBtn = document.getElementById("modeBtn");
+
+    let currentLesson = null;
+
+    function getSavedProgress() {
+      try {
+        return JSON.parse(localStorage.getItem("oopsGrammarProgress") || '{"attempts":0,"correct":0}');
+      } catch {
+        return { attempts: 0, correct: 0 };
+      }
+    }
+
+    function updateProgress() {
+      const p = getSavedProgress();
+      const rate = p.attempts ? Math.round(p.correct / p.attempts * 100) : 0;
+      progressText.textContent =
+        `Completed question attempts: ${p.attempts}. Correct answers: ${p.correct}. Accuracy: ${rate}%.`;
+    }
+
+    function renderTopics() {
+      const level = levelSelect.value;
+      const topics = curriculum[level] || [];
+
+      topicSelect.innerHTML = "";
+      topicButtons.innerHTML = "";
+
+      topics.forEach((item, index) => {
+        const option = document.createElement("option");
+        option.value = String(index);
+        option.textContent = item.title;
+        topicSelect.appendChild(option);
+
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "topic";
+        button.textContent = item.title;
+        button.setAttribute("aria-pressed", index === 0 ? "true" : "false");
+        button.addEventListener("click", () => {
+          topicSelect.value = String(index);
+          renderLesson();
+        });
+        topicButtons.appendChild(button);
+      });
+
+      topicSelect.value = "0";
+      renderLesson();
+    }
+
+    function renderLesson() {
+      const topics = curriculum[levelSelect.value] || [];
+      currentLesson = topics[Number(topicSelect.value)] || topics[0];
+
+      [...topicButtons.children].forEach((button, index) => {
+        button.setAttribute("aria-pressed", index === Number(topicSelect.value) ? "true" : "false");
+      });
+
+      if (!currentLesson) {
+        lesson.textContent = "No lesson is available yet.";
+        questions.innerHTML = "";
+        return;
+      }
+
+      lesson.innerHTML = "";
+      const rule = document.createElement("div");
+      rule.className = "rule";
+      const ruleTitle = document.createElement("strong");
+      ruleTitle.textContent = "Rule: ";
+      rule.append(ruleTitle, document.createTextNode(currentLesson.rule));
+
+      const form = document.createElement("p");
+      const formTitle = document.createElement("strong");
+      formTitle.textContent = "Form: ";
+      form.append(formTitle, document.createTextNode(currentLesson.form));
+
+      const examples = document.createElement("div");
+      examples.className = "example";
+      const examplesTitle = document.createElement("strong");
+      examplesTitle.textContent = "Examples";
+      examples.appendChild(examplesTitle);
+
+      const list = document.createElement("ul");
+      currentLesson.examples.forEach(sentence => {
+        const li = document.createElement("li");
+        li.textContent = sentence;
+        list.appendChild(li);
+      });
+      examples.appendChild(list);
+      lesson.append(rule, form, examples);
+
+      renderQuestions();
+    }
+
+    function renderQuestions() {
+      questions.innerHTML = "";
+      results.hidden = true;
+
+      currentLesson.questions.forEach((q, qi) => {
+        const section = document.createElement("fieldset");
+        section.className = "question";
+        const legend = document.createElement("legend");
+        legend.textContent = `${qi + 1}. ${q.text}`;
+        section.appendChild(legend);
+
+        const answers = document.createElement("div");
+        answers.className = "answers";
+
+        q.options.forEach((optionText, oi) => {
+          const label = document.createElement("label");
+          label.className = "answer";
+          const radio = document.createElement("input");
+          radio.type = "radio";
+          radio.name = `q${qi}`;
+          radio.value = String(oi);
+          radio.required = true;
+          label.append(radio, document.createTextNode(optionText));
+          answers.appendChild(label);
+        });
+
+        section.appendChild(answers);
+        questions.appendChild(section);
+      });
+    }
+
+    levelSelect.addEventListener("change", renderTopics);
+    topicSelect.addEventListener("change", renderLesson);
+
+    quizForm.addEventListener("submit", event => {
+      event.preventDefault();
+
+      if (!currentLesson) return;
+
+      const formData = new FormData(quizForm);
+      let score = 0;
+      let feedbackHtml = "";
+
+      currentLesson.questions.forEach((q, index) => {
+        const selected = formData.get(`q${index}`);
+        const correct = selected !== null && Number(selected) === q.answer;
+        if (correct) score++;
+
+        feedbackHtml += `
+          <p>
+            <strong>Question ${index + 1}:</strong>
+            <span class="${correct ? "correct" : "incorrect"}">${correct ? "Correct" : "Not quite"}</span><br>
+            Correct answer: ${q.options[q.answer]}<br>
+            ${q.why}
+          </p>`;
+      });
+
+      const p = getSavedProgress();
+      p.attempts += currentLesson.questions.length;
+      p.correct += score;
+
+      try {
+        localStorage.setItem("oopsGrammarProgress", JSON.stringify(p));
+      } catch {
+        // Progress can still be displayed for this session if storage is unavailable.
+      }
+
+      results.innerHTML = `<h3>Your score: ${score}/${currentLesson.questions.length}</h3>${feedbackHtml}`;
+      results.hidden = false;
+      updateProgress();
+      results.focus();
+    });
+
+    document.getElementById("resetBtn").addEventListener("click", () => {
+      quizForm.reset();
+      results.hidden = true;
+    });
+
+    document.getElementById("clearProgress").addEventListener("click", () => {
+      try {
+        localStorage.removeItem("oopsGrammarProgress");
+      } catch {
+        // Ignore storage errors.
+      }
+      updateProgress();
+      results.hidden = true;
+    });
+
+    modeBtn.addEventListener("click", () => {
+      const enabled = document.body.classList.toggle("accessible");
+      modeBtn.setAttribute("aria-pressed", String(enabled));
+      modeBtn.textContent = enabled ? "Switch to Normal Mode" : "Switch to Accessible Mode";
+    });
+
+    renderTopics();
+    updateProgress();
+  </script>
+</body>
+</html>
