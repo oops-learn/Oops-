@@ -1,662 +1,344 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Oops! — Make mistakes. Make progress.</title>
-
+<meta name="description" content="Học tiếng Anh từ lỗi sai, dành cho người Việt từ A1 đến C2.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Lexend:wght@500;600;700;800&display=swap" rel="stylesheet">
 <style>
-* {
-  box-sizing: border-box;
-}
-
-:root {
-  --oops-bg: #fffafd;
-  --oops-surface: #ffffff;
-  --oops-pink: #fce8f1;
-  --oops-purple: #57406c;
-  --oops-purple-hover: #443052;
-  --oops-text: #30283a;
-  --oops-muted: #62586b;
-  --oops-border: #eadfe9;
-  --oops-radius: 20px;
-}
-
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 24px;
-}
-
-body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  color: var(--oops-text);
-  background: var(--oops-bg);
-  line-height: 1.7;
-  font-size: 16px;
-}
-
-header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  padding: 16px 5.5%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
-  background: rgba(255, 255, 255, 0.96);
-  border-bottom: 1px solid var(--oops-border);
-  backdrop-filter: blur(12px);
-}
-
-.logo {
-  font-size: 30px;
-  font-weight: 800;
-  letter-spacing: -1px;
-  color: var(--oops-text);
-}
-
-main {
-  width: min(1120px, 100%);
-  margin: 0 auto;
-  padding: 32px 24px;
-}
-
-.hero {
-  background: var(--oops-pink);
-  padding: clamp(28px, 5vw, 56px) clamp(22px, 4vw, 40px);
-  border-radius: 26px;
-  margin-bottom: 32px;
-}
-
-h1 {
-  font-size: clamp(34px, 5vw, 64px);
-  line-height: 1.12;
-  letter-spacing: -1.5px;
-  overflow-wrap: anywhere;
-}
-
-h2 {
-  font-size: clamp(23px, 3vw, 30px);
-  line-height: 1.3;
-}
-
-h3 {
-  line-height: 1.35;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
-  gap: 20px;
-}
-
-.card {
-  background: var(--oops-surface);
-  border: 1px solid var(--oops-border);
-  border-radius: var(--oops-radius);
-  padding: 24px;
-  margin-top: 18px;
-  box-shadow: 0 5px 20px rgba(48, 40, 58, 0.035);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.card:hover {
-  border-color: #cbb8dd;
-  box-shadow: 0 8px 26px rgba(48, 40, 58, 0.07);
-}
-
-button {
-  padding: 12px 18px;
-  background: var(--oops-purple);
-  color: white;
-  border: 2px solid var(--oops-purple);
-  border-radius: 12px;
-  cursor: pointer;
-  font: inherit;
-  font-weight: 600;
-  transition: background 0.2s ease, transform 0.2s ease;
-}
-
-button:hover {
-  background: var(--oops-purple-hover);
-  border-color: var(--oops-purple-hover);
-}
-
-button:active {
-  transform: translateY(1px);
-}
-
-button:focus-visible,
-a:focus-visible,
-input:focus-visible,
-select:focus-visible,
-textarea:focus-visible {
-  outline: 3px solid #8b69c2;
-  outline-offset: 4px;
-}
-
-a {
-  color: var(--oops-purple);
-  text-underline-offset: 3px;
-}
-
-label {
-  display: block;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid var(--oops-border);
-  border-radius: 10px;
-}
-
-input,
-select,
-textarea {
-  max-width: 100%;
-  font: inherit;
-}
-
-.skip {
-  position: absolute;
-  left: -9999px;
-  top: 0;
-  z-index: 200;
-  background: white;
-  color: #222;
-  padding: 12px;
-}
-
-.skip:focus {
-  left: 12px;
-  top: 12px;
-}
-
-footer {
-  text-align: center;
-  padding: 32px 20px;
-  color: var(--oops-muted);
-}
-
-body.accessible {
-  background: #ffffff;
-  color: #111111;
-  font-size: 20px;
-  line-height: 1.9;
-}
-
-body.accessible .hero,
-body.accessible .card {
-  background: #ffffff;
-  color: #111111;
-  border: 2px solid #333333;
-  box-shadow: none;
-}
-
-body.accessible button {
-  background: #111111;
-  border-color: #111111;
-  color: #ffffff;
-}
-
-body.accessible a {
-  color: #003f8c;
-}
-
-@media (max-width: 600px) {
-}
+:root{--primary:#6c63ff;--primary-soft:#eeecff;--ink:#302b49;--muted:#716c83;--card:#fff;--border:#e8e4f3;--mint:#42c9b5;--mint-soft:#e3f8f3;--coral:#ff7a90;--coral-soft:#fff0f2;--sun:#ffd166;--radius:22px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#faf9ff;color:var(--ink);font-family:"Be Vietnam Pro",system-ui,sans-serif;line-height:1.65}
+button,input,select{font:inherit}
+a{color:inherit;text-decoration:none}
+button,a,input,select{outline-offset:4px}
+:focus-visible{outline:3px solid #ff8c00}
+.topbar{height:72px;position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:0 max(4%,calc((100% - 1160px)/2));background:#ffffffed;backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.brand{display:flex;align-items:center;gap:10px;font:800 25px Lexend,sans-serif}
+.brand-mark{display:grid;place-items:center;width:38px;height:38px;border-radius:13px;background:var(--primary);color:var(--sun)}
+.brand-name span{color:var(--coral)}
+.nav{display:flex;gap:4px;align-items:center}
+.nav a,.nav button{font-size:13px;font-weight:700;padding:10px 12px;border-radius:999px;background:transparent;border:0;color:var(--muted);cursor:pointer}
+.nav a:hover,.nav button:hover{background:var(--primary-soft);color:var(--primary)}
+.nav .signin{background:var(--primary);color:white;padding:11px 18px}
+.settings-wrap{position:relative}
+.settings-menu{position:absolute;right:0;top:48px;width:210px;padding:9px;background:white;border:1px solid var(--border);box-shadow:0 15px 45px #302b4920;border-radius:16px}
+.settings-menu button{display:block;width:100%;text-align:left;border-radius:10px}
+.hero{position:relative;overflow:hidden;background:radial-gradient(circle at 12% 20%,#ffe8a866,transparent 34%),radial-gradient(circle at 88% 15%,#42c9b555,transparent 35%),radial-gradient(circle at 75% 90%,#ff7a9040,transparent 40%),var(--primary-soft)}
+.hero-inner{max-width:1160px;margin:auto;padding:76px 24px;display:grid;grid-template-columns:1.08fr .92fr;align-items:center;gap:55px}
+.eyebrow{display:inline-flex;border-radius:999px;background:white;padding:7px 14px;font-size:13px;font-weight:800;color:var(--primary);box-shadow:0 4px 20px #302b490b}
+h1,h2,h3{font-family:Lexend,"Be Vietnam Pro",sans-serif;line-height:1.2}
+h1{font-size:clamp(50px,7vw,80px);margin:22px 0 8px;letter-spacing:-3px}
+h1 span{color:var(--coral)}
+.tagline{font-size:clamp(20px,2.5vw,29px);font-weight:800;margin:0}
+.tagline span{color:var(--primary)}
+.lead{max-width:570px;color:#625d77;font-size:16px;margin:20px 0 0}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.btn{display:inline-flex;justify-content:center;align-items:center;min-height:48px;padding:12px 20px;border-radius:999px;border:1px solid transparent;font-weight:800;font-size:14px;cursor:pointer;transition:transform .18s,box-shadow .18s}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:var(--primary);color:white;box-shadow:0 8px 20px #6c63ff35}
+.btn-outline{background:#ffffffb8;border-color:#ffffff;color:var(--ink)}
+.example{padding:25px;background:var(--card);border:1px solid #ffffff;border-radius:28px;box-shadow:0 20px 55px #473b7020;transform:rotate(1deg)}
+.example-head{display:flex;justify-content:space-between;gap:10px;align-items:center;font-weight:800}
+.badge{background:var(--primary-soft);color:var(--primary);border-radius:999px;padding:5px 10px;font-size:12px}
+.sample-box{padding:15px;border-radius:17px;margin-top:15px}
+.wrong{background:var(--coral-soft)}.right{background:var(--mint-soft)}
+.sample-label{font-size:12px;font-weight:800}
+.wrong .sample-label{color:#bd425b}.right .sample-label{color:#167e6d}
+.sample-sentence{font-size:18px;font-weight:700;margin:5px 0 0}
+.why{color:var(--muted);font-size:14px;margin:17px 0 0}
+.section{max-width:1160px;padding:58px 24px;margin:auto}
+.section h2{font-size:clamp(25px,4vw,34px);margin:0}
+.sub{color:var(--muted);margin:9px 0 0}
+.levels{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px}
+.level{border:1px solid var(--border);background:white;color:var(--ink);border-radius:999px;padding:10px 17px;font-weight:800;cursor:pointer}
+.level.active{background:var(--primary);color:white;border-color:var(--primary)}
+.level-summary{margin-top:18px;background:white;border:1px solid var(--border);border-radius:20px;padding:22px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.level-summary p{margin:5px 0 0;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:17px;margin-top:24px}
+.feature{display:flex;flex-direction:column;min-height:235px;background:white;border:1px solid var(--border);border-radius:24px;padding:22px;transition:transform .2s,box-shadow .2s,border-color .2s}
+.feature:hover{transform:translateY(-5px);box-shadow:0 15px 30px #302b4912;border-color:#c7c1ff}
+.feature-icon{width:54px;height:54px;display:grid;place-items:center;border-radius:17px;font-size:25px}
+.feature h3{font-size:18px;margin:17px 0 0}
+.feature p{color:var(--muted);font-size:14px;margin:9px 0 20px}
+.feature strong{margin-top:auto;color:var(--primary);font-size:14px}
+.coral-tone{background:var(--coral-soft)}.mint-tone{background:var(--mint-soft)}.sun-tone{background:#fff6dc}.purple-tone{background:var(--primary-soft)}
+.footer{border-top:1px solid var(--border);background:white;padding:28px 24px;color:var(--muted);font-size:13px}
+.footer-inner{max-width:1160px;margin:auto;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.dialog-backdrop{position:fixed;inset:0;background:#211b3b70;z-index:50;display:none;align-items:center;justify-content:center;padding:18px}
+.dialog-backdrop.show{display:flex}
+.dialog{width:min(500px,100%);max-height:90vh;overflow:auto;background:white;border-radius:24px;padding:25px;box-shadow:0 25px 90px #211b3b45}
+.dialog-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.dialog h2{margin:0;font-size:25px}
+.close{border:0;background:#f2effa;border-radius:50%;width:38px;height:38px;font-size:20px;cursor:pointer}
+.setting-label{display:block;font-size:14px;font-weight:800;margin:20px 0 9px}
+.swatches{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.swatch{width:34px;height:34px;border-radius:50%;border:2px solid white;outline:1px solid #ddd;cursor:pointer}
+.swatch.selected{outline:3px solid var(--ink)}
+.color-input{width:100%;height:45px;border:1px solid var(--border);border-radius:12px;padding:5px;background:white}
+.file-input{display:block;width:100%;padding:12px;border:1px dashed #b8b0d4;border-radius:12px;background:#faf9ff}
+.preview{height:95px;border-radius:14px;border:1px solid var(--border);margin-top:12px;background:var(--primary-soft);background-position:center;background-size:cover}
+.setting-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.setting-actions .btn{flex:1}
+body.accessible{background:#fff;color:#000;font-size:18px}
+body.accessible .topbar,body.accessible .feature,body.accessible .level-summary,body.accessible .example,body.accessible .dialog{border:2px solid #000}
+body.accessible .hero{background:#fff;border-block:3px solid #000}
+body.accessible .lead,body.accessible .sub,body.accessible .why,body.accessible .feature p{color:#222}
+body.accessible .btn-primary,body.accessible .level.active{background:#000;color:#fff}
+body.accessible .feature,body.accessible .example,body.accessible .level-summary{box-shadow:none}
+body.accessible .wrong{border:2px solid #a00020}
+body.accessible .right{border:2px solid #006747}
+body.has-background .hero{background-image:linear-gradient(#ffffffc9,#ffffffc9),var(--custom-background);background-size:cover;background-position:center}
+body.accessible.has-background .hero{background-image:none}
+@media(max-width:900px){.nav{gap:0}.nav a{padding:9px 7px;font-size:12px}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.hero-inner{gap:30px;padding:55px 24px}}
+@media(max-width:680px){.topbar{height:auto;min-height:66px;padding:10px 16px;flex-wrap:wrap}.nav{order:3;width:100%;overflow-x:auto;padding-bottom:3px}.nav a{white-space:nowrap}.nav .signin{display:none}.hero-inner{grid-template-columns:1fr;padding:43px 20px;gap:30px}.example{transform:none}.section{padding:42px 20px}.cards{grid-template-columns:1fr 1fr}.feature{padding:17px;min-height:225px}.sample-sentence{font-size:16px}}
+@media(max-width:400px){.cards{grid-template-columns:1fr}.tagline{font-size:20px}.brand{font-size:22px}}
 </style>
 </head>
 <body>
-
-<header>
-  <a class="logo" href="#home" aria-label="Oops! - Trang chủ"
-     style="text-decoration:none;">Oops!</a>
-
-  <nav aria-label="Điều hướng chính"
-       style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-    <a href="#home">Trang chủ</a>
-<a href="error-fix.html">Error Fix</a>
- <a href="grammar.html">Grammar Lab</a>
-<a href="vocabulary.html">Vocabulary Lab</a>
-<a href="progress.html">Progress</a>
-<a href="roadmap.html">Roadmap</a>
-    <button type="button" id="customizeBtn"
-            onclick="document.getElementById('customizePanel').hidden = !document.getElementById('customizePanel').hidden">
-      Customize
-    </button>
-    <button type="button" id="accessibilityBtn"
-            onclick="document.body.classList.toggle('accessible')">
-      Accessible Mode
-    </button>
+<header class="topbar">
+  <a class="brand" href="index.html" aria-label="Oops! Trang chủ">
+    <span class="brand-mark" aria-hidden="true">!</span>
+    <span class="brand-name">Oops<span>!</span></span>
+  </a>
+  <nav class="nav" aria-label="Điều hướng chính">
+    <a href="error-fix.html">Error Fix</a>
+    <a href="grammar.html">Ngữ pháp</a>
+    <a href="vocabulary.html">Từ vựng</a>
+    <a href="roadmap.html">Lộ trình</a>
+    <a href="progress.html">Tiến độ</a>
+    <div class="settings-wrap">
+      <button id="settingsButton" type="button" aria-haspopup="dialog">⚙ Settings</button>
+      <div class="settings-menu" id="settingsMenu" hidden>
+        <button type="button" id="customizeButton">🎨 Customize appearance</button>
+        <button type="button" id="accessibilityButton">♿ Accessible Mode</button>
+      </div>
+    </div>
+    <a class="signin" href="grammar.html">Bắt đầu học →</a>
   </nav>
 </header>
-<main id="main">
-<section class="hero" id="home">
-<p>YOUR ENGLISH LEARNING SPACE</p>
-<h1>Oops!<br>Make mistakes.<br>Make progress.</h1>
-<p>Learn from your mistakes. Build your English, one step at a time.</p>
-<a href="#practice">Start learning ↓</a>
-</section>
-<section aria-labelledby="explore">
-<h2 id="explore">Explore your learning space</h2>
-<div class="grid">
 
-<article class="card">
-  <h3>Error Fix</h3>
-  <p>Check your English sentences and understand your mistakes.</p>
-  <a href="error-fix.html">Open Error Fix →</a>
-</article>
-
-<article class="card"><h3>Vocabulary Lab</h3><p>Build vocabulary with meanings and examples.</p><p>Coming soon</p></article>
-<article class="card" id="grammar">
-  <h3>Grammar Lab</h3>
-  <p>Learn grammar rules and practise.</p>
-
-  <label for="grammar-level">Choose your level</label>
-  <select id="grammar-level">
-  <option value="A1">A1 — Beginner</option>
-  <option value="A2">A2 — Elementary</option>
-  <option value="B1">B1 — Intermediate</option>
-  <option value="B2">B2 — Upper-intermediate</option>
-  <option value="C1">C1 — Advanced</option>
-  <option value="C2">C2 — Proficiency</option>
-</select>
-
-  <label for="grammar-topic">Choose a topic</label>
-  <select id="grammar-topic"></select>
-    <option value="present-simple">Present Simple</option>
-    <option value="present-continuous">Present Continuous</option>
-  </select>
-
-  <div id="grammar-lesson" aria-live="polite">
-    <h4>Present Simple</h4>
-    <p><strong>Use:</strong> Habits, routines and general facts.</p>
-    <p><strong>Form:</strong> Subject + base verb. Add -s/-es with he, she or it.</p>
-    <p><strong>Example:</strong> She goes to school every day.</p>
-    <p><strong>Common mistake:</strong> She go to school.</p>
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <span class="eyebrow">Dành cho người Việt · A1 → C2</span>
+      <h1>Oops<span>!</span></h1>
+      <p class="tagline">Make mistakes. <span>Make progress.</span></p>
+      <p style="font-weight:700">“Lỡ sai một chút, tiến bộ thêm một bước.”</p>
+      <p class="lead">Luyện tiếng Anh qua việc nhận diện, sửa lỗi và hiểu sâu cách sử dụng ngôn ngữ. Từ A1 đến C2, mỗi lỗi sai là một cơ hội để tiến bộ.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="error-fix.html">Bắt đầu học →</a>
+        <a class="btn btn-outline" href="#learning">Khám phá Oops!</a>
+      </div>
+    </div>
+    <article class="example" aria-label="Ví dụ sửa lỗi tiếng Anh">
+      <div class="example-head"><span>Ví dụ lỗi · <span id="sampleLevel">A1</span></span><span class="badge">Error Detective</span></div>
+      <div class="sample-box wrong">
+        <div class="sample-label">✕ Chưa đúng</div>
+        <p class="sample-sentence" id="wrongSentence">She go to school every day.</p>
+      </div>
+      <div class="sample-box right">
+        <div class="sample-label">✓ Đúng</div>
+        <p class="sample-sentence" id="rightSentence">She goes to school every day.</p>
+      </div>
+      <p class="why" id="explanation">💡 Với chủ ngữ he, she, it ở thì hiện tại đơn, động từ thường thêm -s hoặc -es.</p>
+    </article>
   </div>
-</article>
-<article class="card"><h3>Accessible Library</h3><p>Explore structured learning resources.</p><p>Coming soon</p></article>
-</div>
 </section>
-</main>
-<footer>Oops! — Make mistakes. Make progress.</footer>
+
+<section class="section" id="learning" aria-labelledby="levelHeading">
+  <h2 id="levelHeading">Bạn đang ở trình độ nào?</h2>
+  <p class="sub">Chọn cấp độ CEFR để xem ví dụ và lộ trình phù hợp.</p>
+  <div class="levels" role="group" aria-label="Chọn trình độ">
+    <button class="level active" data-level="A1">A1</button>
+    <button class="level" data-level="A2">A2</button>
+    <button class="level" data-level="B1">B1</button>
+    <button class="level" data-level="B2">B2</button>
+    <button class="level" data-level="C1">C1</button>
+    <button class="level" data-level="C2">C2</button>
+  </div>
+  <div class="level-summary">
+    <div><strong id="levelTitle">A1 · Beginner</strong><p id="levelDescription">Xây dựng nền tảng từ vựng và ngữ pháp cơ bản.</p></div>
+    <a class="btn btn-primary" id="roadmapLink" href="roadmap.html">Xem lộ trình A1 →</a>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="labsHeading">
+  <h2 id="labsHeading">Khám phá các phòng học</h2>
+  <p class="sub">Chọn một khu vực và bắt đầu tiến bộ từng ngày.</p>
+  <div class="cards">
+    <a class="feature" href="error-fix.html"><span class="feature-icon coral-tone">🔍</span><h3>Error Fix</h3><p>Nhận diện lỗi sai phổ biến và luyện cách sửa câu tiếng Anh.</p><strong>Mở phòng học →</strong></a>
+    <a class="feature" href="grammar.html"><span class="feature-icon mint-tone">📚</span><h3>Grammar Lab</h3><p>Học ngữ pháp theo cấp độ, làm câu hỏi và xem giải thích.</p><strong>Mở phòng học →</strong></a>
+    <a class="feature" href="vocabulary.html"><span class="feature-icon sun-tone">🧠</span><h3>Vocabulary Lab</h3><p>Mở rộng từ vựng với nghĩa, ví dụ và luyện phát âm.</p><strong>Mở phòng học →</strong></a>
+    <a class="feature" href="progress.html"><span class="feature-icon purple-tone">📈</span><h3>My Progress</h3><p>Theo dõi số câu luyện tập và độ chính xác đã ghi nhận.</p><strong>Xem tiến độ →</strong></a>
+  </div>
+</section>
+
+<footer class="footer"><div class="footer-inner"><span>© 2026 Oops! — Make mistakes. Make progress.</span><span>Learn with confidence. Improve one mistake at a time.</span></div></footer>
+
+<div class="dialog-backdrop" id="customizeDialog" role="presentation">
+  <section class="dialog" role="dialog" aria-modal="true" aria-labelledby="dialogTitle">
+    <div class="dialog-head"><h2 id="dialogTitle">🎨 Customize appearance</h2><button class="close" type="button" id="closeDialog" aria-label="Đóng">×</button></div>
+    <p class="sub">Cá nhân hóa giao diện Oops! theo sở thích của bạn.</p>
+    <label class="setting-label" for="accentColor">Màu chủ đạo</label>
+    <div class="swatches" id="swatches">
+      <button class="swatch selected" data-color="#6c63ff" style="background:#6c63ff" aria-label="Tím"></button>
+      <button class="swatch" data-color="#2878e5" style="background:#2878e5" aria-label="Xanh dương"></button>
+      <button class="swatch" data-color="#19a58a" style="background:#19a58a" aria-label="Xanh mint"></button>
+      <button class="swatch" data-color="#f06b91" style="background:#f06b91" aria-label="Hồng"></button>
+      <button class="swatch" data-color="#f39b35" style="background:#f39b35" aria-label="Cam"></button>
+      <button class="swatch" data-color="#343044" style="background:#343044" aria-label="Than chì"></button>
+    </div>
+    <label class="setting-label" for="accentColor">Hoặc chọn màu bất kỳ</label>
+    <input class="color-input" type="color" id="accentColor" value="#6c63ff">
+    <label class="setting-label" for="backgroundUpload">Tải ảnh nền từ máy tính</label>
+    <input class="file-input" type="file" id="backgroundUpload" accept="image/png,image/jpeg,image/webp">
+    <div class="preview" id="backgroundPreview" aria-label="Xem trước ảnh nền"></div>
+    <div class="setting-actions">
+      <button class="btn btn-primary" type="button" id="saveSettings">Lưu giao diện</button>
+      <button class="btn btn-outline" type="button" id="resetSettings">Khôi phục mặc định</button>
+    </div>
+    <p class="sub" id="settingsStatus" role="status" aria-live="polite"></p>
+  </section>
+</div>
+
 <script>
-const mode=document.getElementById("mode");
-mode.addEventListener("click",()=>{
-const enabled=document.body.classList.toggle("accessible");
-mode.setAttribute("aria-pressed",String(enabled));
-mode.textContent=enabled?"Switch to Normal Mode":"Switch to Accessible Mode";
+const levels = {
+ A1:{name:"Beginner",desc:"Xây dựng nền tảng từ vựng và ngữ pháp cơ bản.",wrong:"She go to school every day.",right:"She goes to school every day.",why:"Với chủ ngữ she ở thì hiện tại đơn, động từ thường thêm -s hoặc -es."},
+ A2:{name:"Elementary",desc:"Mở rộng vốn từ và sử dụng cấu trúc quen thuộc.",wrong:"Yesterday, I goed to school.",right:"Yesterday, I went to school.",why:"Go là động từ bất quy tắc; dạng quá khứ của go là went."},
+ B1:{name:"Intermediate",desc:"Kết nối ý tưởng và diễn đạt trải nghiệm rõ ràng hơn.",wrong:"I have seen him yesterday.",right:"I saw him yesterday.",why:"Khi có mốc thời gian đã kết thúc như yesterday, thường dùng Past Simple."},
+ B2:{name:"Upper Intermediate",desc:"Phát triển lập luận, độ chính xác và cách dùng từ.",wrong:"Despite of the rain, we went out.",right:"Despite the rain, we went out.",why:"Despite đi trực tiếp với danh từ hoặc cụm danh từ; không thêm of."},
+ C1:{name:"Advanced",desc:"Dùng ngôn ngữ linh hoạt và chính xác trong ngữ cảnh phức tạp.",wrong:"Rarely I have seen such a view.",right:"Rarely have I seen such a view.",why:"Khi rarely đứng đầu câu để nhấn mạnh, thường dùng đảo ngữ trợ động từ."},
+ C2:{name:"Proficient",desc:"Tinh chỉnh sắc thái nghĩa, văn phong và cấu trúc nâng cao.",wrong:"Had I knew, I would have helped.",right:"Had I known, I would have helped.",why:"Trong đảo ngữ điều kiện loại 3, dùng Had + chủ ngữ + past participle."}
+};
+const root = document.documentElement;
+const body = document.body;
+const settingsButton = document.getElementById("settingsButton");
+const settingsMenu = document.getElementById("settingsMenu");
+const dialogBackdrop = document.getElementById("customizeDialog");
+const colorInput = document.getElementById("accentColor");
+const upload = document.getElementById("backgroundUpload");
+const preview = document.getElementById("backgroundPreview");
+let pendingImage = null;
+let currentImage = null;
+
+function applyColor(color){
+ if(!/^#[0-9a-f]{6}$/i.test(color)) return;
+ root.style.setProperty("--primary",color);
+ root.style.setProperty("--primary-soft",color+"20");
+ colorInput.value=color;
+ document.querySelectorAll(".swatch").forEach(b=>b.classList.toggle("selected",b.dataset.color.toLowerCase()===color.toLowerCase()));
+}
+function applyImage(image){
+ currentImage=image;
+ if(image){
+   body.classList.add("has-background");
+   root.style.setProperty("--custom-background",`url("${image}")`);
+   preview.style.backgroundImage=`url("${image}")`;
+ }else{
+   body.classList.remove("has-background");
+   root.style.removeProperty("--custom-background");
+   preview.style.backgroundImage="none";
+ }
+}
+function loadSettings(){
+ try{
+  const saved=JSON.parse(localStorage.getItem("oopsAppearance")||"{}");
+  if(saved.color) applyColor(saved.color);
+  if(saved.image) applyImage(saved.image);
+ }catch(e){console.warn("Không thể tải tùy chỉnh đã lưu",e)}
+}
+function openCustomize(){
+ settingsMenu.hidden=true;
+ dialogBackdrop.classList.add("show");
+ document.getElementById("closeDialog").focus();
+}
+function closeCustomize(){
+ dialogBackdrop.classList.remove("show");
+ document.getElementById("customizeButton").focus();
+}
+settingsButton.addEventListener("click",()=>{
+ settingsMenu.hidden=!settingsMenu.hidden;
 });
-
-const grammarTopic = document.getElementById("grammar-topic");
-const grammarLesson = document.getElementById("grammar-lesson");
-const grammarLevel = document.getElementById("grammar-level");
-
-const grammarLessons = [
-  {
-    level: "A1", title: "Present Simple",
-    use: "Thói quen, lịch trình và sự thật hiển nhiên.",
-    form: "S + V(s/es). Với câu phủ định và nghi vấn, dùng do/does.",
-    example: "She goes to school every day.",
-    mistake: "She go to school every day.",
-    tip: "He, she, it đi với động từ thêm -s/-es ở câu khẳng định.",
-    question: "Choose the correct sentence.",
-    options: ["He play football.", "He plays football.", "He playing football."],
-    answer: 1, explanation: "He là ngôi thứ ba số ít nên play đổi thành plays."
-  },
-  {
-    level: "A1", title: "Present Continuous",
-    use: "Hành động đang diễn ra ở hiện tại.",
-    form: "S + am/is/are + V-ing.",
-    example: "They are studying English now.",
-    mistake: "They studying English now.",
-    tip: "Không bỏ am, is hoặc are trước động từ -ing.",
-    question: "Choose the correct sentence.",
-    options: ["I am reading now.", "I reading now.", "I is reading now."],
-    answer: 0, explanation: "Với chủ ngữ I, dùng am + V-ing."
-  },
-  {
-    level: "A1", title: "Pronouns and Possessive Adjectives",
-    use: "Đại từ nhân xưng và tính từ sở hữu.",
-    form: "I–my; you–your; he–his; she–her; it–its; we–our; they–their.",
-    example: "This is my book. She likes her school.",
-    mistake: "He is my friend. I like he.",
-    tip: "Sau động từ cần tân ngữ như me, him, her, us, them.",
-    question: "This is Anna. ___ is my friend.",
-    options: ["Her", "She", "Hers"],
-    answer: 1, explanation: "She là đại từ chủ ngữ đứng trước động từ is."
-  },
-  {
-    level: "A1", title: "There is / There are",
-    use: "Nói có người hoặc vật ở đâu đó.",
-    form: "There is + danh từ số ít/không đếm được; There are + danh từ số nhiều.",
-    example: "There are three books on the desk.",
-    mistake: "There is three books on the desk.",
-    tip: "Chọn is/are theo danh từ đứng sau.",
-    question: "___ two windows in my room.",
-    options: ["There is", "There are", "There am"],
-    answer: 1, explanation: "Two windows là danh từ số nhiều nên dùng There are."
-  },
-  {
-    level: "A1", title: "Articles: a / an",
-    use: "Dùng trước danh từ đếm được số ít khi nhắc đến chung hoặc lần đầu.",
-    form: "a + âm phụ âm; an + âm nguyên âm.",
-    example: "a book; an apple; an hour.",
-    mistake: "a apple",
-    tip: "Chọn theo âm đầu, không chỉ theo chữ cái đầu.",
-    question: "She has ___ umbrella.",
-    options: ["a", "an", "the"],
-    answer: 1, explanation: "Umbrella bắt đầu bằng âm nguyên âm nên dùng an."
-  },
-  {
-    level: "A2", title: "Past Simple",
-    use: "Hành động đã xảy ra và kết thúc trong quá khứ.",
-    form: "S + V2/ed; phủ định: did not + V nguyên mẫu.",
-    example: "We visited Hue last summer.",
-    mistake: "We didn't visited Hue.",
-    tip: "Sau did/didn't, động từ trở về nguyên mẫu.",
-    question: "Yesterday, she ___ to school.",
-    options: ["go", "went", "goes"],
-    answer: 1, explanation: "Yesterday chỉ thời gian quá khứ; go có dạng quá khứ là went."
-  },
-  {
-    level: "A2", title: "Countable and Uncountable Nouns",
-    use: "Phân biệt danh từ đếm được và không đếm được.",
-    form: "many/few + danh từ đếm được; much/little + danh từ không đếm được.",
-    example: "many books; much water.",
-    mistake: "many information",
-    tip: "Information thường không đếm được trong tiếng Anh.",
-    question: "How ___ water do you need?",
-    options: ["many", "much", "few"],
-    answer: 1, explanation: "Water là danh từ không đếm được nên dùng much."
-  },
-  {
-    level: "A2", title: "Comparatives and Superlatives",
-    use: "So sánh hơn và so sánh nhất.",
-    form: "Tính từ ngắn: -er/-est; tính từ dài: more/most.",
-    example: "Mai is taller than Lan. Tom is the tallest boy.",
-    mistake: "more taller",
-    tip: "Không dùng đồng thời more và -er cho cùng một tính từ.",
-    question: "This book is ___ than that one.",
-    options: ["interesting", "more interesting", "most interesting"],
-    answer: 1, explanation: "Interesting là tính từ dài; so sánh hơn dùng more interesting."
-  },
-  {
-    level: "A2", title: "Future: will and be going to",
-    use: "Will thường diễn tả quyết định tức thời, dự đoán; be going to thường diễn tả dự định hoặc dự đoán có căn cứ.",
-    form: "will + V; am/is/are going to + V.",
-    example: "Look at those clouds! It is going to rain.",
-    mistake: "It is going to raining.",
-    tip: "Sau going to dùng động từ nguyên mẫu.",
-    question: "I have decided. I ___ study medicine.",
-    options: ["am going to", "am going", "going to"],
-    answer: 0, explanation: "Dự định đã có trước đó có thể dùng am going to + study."
-  },
-  {
-    level: "A2", title: "Modal Verbs: can, must, should",
-    use: "Diễn đạt khả năng, nghĩa vụ và lời khuyên.",
-    form: "Modal verb + động từ nguyên mẫu không to.",
-    example: "You should get enough sleep.",
-    mistake: "You should to sleep early.",
-    tip: "Không thêm to sau should, must hoặc can.",
-    question: "You ___ wear a seat belt.",
-    options: ["should to", "should", "should wearing"],
-    answer: 1, explanation: "Should đi trực tiếp với động từ nguyên mẫu wear."
-  },
-  {
-    level: "B1", title: "Present Perfect",
-    use: "Kinh nghiệm, kết quả hiện tại hoặc hành động kéo dài đến hiện tại.",
-    form: "S + have/has + V3.",
-    example: "I have lived here for five years.",
-    mistake: "I have live here for five years.",
-    tip: "Sau have/has dùng quá khứ phân từ (V3).",
-    question: "She has never ___ to Japan.",
-    options: ["be", "went", "been"],
-    answer: 2, explanation: "Cấu trúc hiện tại hoàn thành cần V3; be có V3 là been."
-  },
-  {
-    level: "B1", title: "First and Second Conditionals",
-    use: "Câu điều kiện loại 1 nói về khả năng có thật; loại 2 nói về giả định không có thật hoặc khó xảy ra ở hiện tại.",
-    form: "Type 1: If + present simple, will + V. Type 2: If + past simple, would + V.",
-    example: "If it rains, we will stay home. If I had time, I would travel.",
-    mistake: "If it will rain, we will stay home.",
-    tip: "Trong mệnh đề if của loại 1, thông thường dùng hiện tại đơn.",
-    question: "If I ___ rich, I would travel the world.",
-    options: ["am", "were", "will be"],
-    answer: 1, explanation: "Câu điều kiện loại 2 dùng quá khứ đơn; were thường được dùng trong giả định trang trọng."
-  },
-  {
-    level: "B1", title: "Passive Voice",
-    use: "Nhấn mạnh hành động hoặc đối tượng chịu tác động.",
-    form: "S + be + V3; thì của be thay đổi theo câu gốc.",
-    example: "The bridge was built in 2010.",
-    mistake: "The bridge was build in 2010.",
-    tip: "Sau be trong câu bị động dùng V3.",
-    question: "English ___ in many countries.",
-    options: ["speaks", "is spoken", "is speaking"],
-    answer: 1, explanation: "English là đối tượng được nói; dùng hiện tại đơn bị động is spoken."
-  },
-  {
-    level: "B1", title: "Relative Clauses",
-    use: "Bổ sung thông tin cho danh từ.",
-    form: "who: người; which: vật; that: người/vật trong mệnh đề xác định; whose: sở hữu.",
-    example: "The girl who won the prize is my friend.",
-    mistake: "The girl which won the prize...",
-    tip: "Who thường dùng để chỉ người.",
-    question: "The man ___ lives next door is a doctor.",
-    options: ["who", "where", "whose"],
-    answer: 0, explanation: "Who thay cho the man và làm chủ ngữ của mệnh đề quan hệ."
-  },
-  {
-    level: "B1", title: "Reported Speech",
-    use: "Thuật lại lời nói của người khác.",
-    form: "Câu tường thuật thường đổi đại từ, thời và từ chỉ thời gian/nơi chốn theo ngữ cảnh.",
-    example: 'She said, "I am tired." → She said (that) she was tired.',
-    mistake: 'She said that "I am tired."',
-    tip: "Không phải trường hợp nào cũng lùi thì; cần xét thời điểm và sự thật còn đúng hay không.",
-    question: 'Tom said, "I am busy." → Tom said that he ___ busy.',
-    options: ["is", "was", "be"],
-    answer: 1, explanation: "Trong cách tường thuật thông thường ở quá khứ, am chuyển thành was."
-  },
-  {
-    level: "B2", title: "Mixed Conditionals",
-    use: "Kết hợp điều kiện quá khứ với kết quả hiện tại hoặc ngược lại.",
-    form: "If + past perfect, would + V (kết quả hiện tại) là một mẫu phổ biến.",
-    example: "If I had studied medicine, I would be a doctor now.",
-    mistake: "If I had studied medicine, I would have been a doctor now. (không phù hợp nếu muốn nói kết quả hiện tại)",
-    tip: "Xác định thời gian của điều kiện và thời gian của kết quả.",
-    question: "If she had left earlier, she ___ here now.",
-    options: ["would be", "would have been", "will be"],
-    answer: 0, explanation: "Điều kiện ở quá khứ nhưng kết quả ở hiện tại nên dùng would be."
-  },
-  {
-    level: "B2", title: "Inversion for Emphasis",
-    use: "Đảo trợ động từ lên trước chủ ngữ để nhấn mạnh, thường sau trạng từ phủ định.",
-    form: "Never/Rarely/Seldom + auxiliary + subject + verb.",
-    example: "Never have I seen such a beautiful view.",
-    mistake: "Never I have seen such a beautiful view.",
-    tip: "Sau trạng từ phủ định đầu câu, dùng trật tự đảo ngữ.",
-    question: "Rarely ___ such dedication.",
-    options: ["we see", "do we see", "we do see"],
-    answer: 1, explanation: "Rarely ở đầu câu yêu cầu đảo trợ động từ do trước chủ ngữ we."
-  },
-  {
-    level: "B2", title: "Cleft Sentences",
-    use: "Nhấn mạnh một thành phần trong câu.",
-    form: "It is/was + phần nhấn mạnh + that/who + phần còn lại.",
-    example: "It was Anna who found the key.",
-    mistake: "It was Anna which found the key.",
-    tip: "Who thường dùng cho người trong cấu trúc nhấn mạnh này.",
-    question: "___ John who solved the problem.",
-    options: ["It was", "There was", "What was"],
-    answer: 0, explanation: "Cấu trúc nhấn mạnh phổ biến là It was + thành phần nhấn mạnh + who/that."
-  },
-  {
-    level: "B2", title: "Participle Clauses",
-    use: "Rút gọn mệnh đề trạng ngữ khi chủ thể và quan hệ ý nghĩa phù hợp.",
-    form: "V-ing thường mang nghĩa chủ động; V3 thường mang nghĩa bị động.",
-    example: "Walking home, I saw an old friend.",
-    mistake: "Walking home, the rain started. (chủ thể gây hiểu nhầm)",
-    tip: "Chủ thể ngầm của phân từ cần phù hợp với chủ ngữ mệnh đề chính.",
-    question: "___ by the news, she called her family.",
-    options: ["Shocking", "Shocked", "Shock"],
-    answer: 1, explanation: "She là người cảm thấy sốc nên dùng phân từ mang nghĩa bị động/cảm xúc shocked."
-  },
-  {
-    level: "C1", title: "Advanced Modal Perfects",
-    use: "Suy đoán, phê bình hoặc đánh giá về sự việc trong quá khứ.",
-    form: "must/might/could/should + have + V3.",
-    example: "You should have checked the figures.",
-    mistake: "You should have check the figures.",
-    tip: "Sau have trong cấu trúc này dùng V3.",
-    question: "He isn't here. He ___ missed the train.",
-    options: ["might have", "might has", "might had"],
-    answer: 0, explanation: "Might have + V3 diễn tả khả năng đã xảy ra trong quá khứ."
-  },
-  {
-    level: "C1", title: "Advanced Hedging",
-    use: "Làm cho nhận định thận trọng, phù hợp với văn phong học thuật.",
-    form: "It appears that...; The evidence suggests that...; This may indicate...",
-    example: "The findings appear to suggest a correlation.",
-    mistake: "The findings prove this is always true. (khẳng định quá mức khi chứng cứ chưa đủ)",
-    tip: "Mức độ chắc chắn của ngôn ngữ cần tương xứng với bằng chứng.",
-    question: "Which phrase expresses a cautious claim?",
-    options: ["This unquestionably proves...", "The evidence may suggest...", "It is always certain that..."],
-    answer: 1, explanation: "May suggest thể hiện sự thận trọng thay vì khẳng định tuyệt đối."
-  },
-  {
-    level: "C1", title: "Advanced Subjunctive",
-    use: "Thường xuất hiện trong đề nghị, yêu cầu hoặc văn phong trang trọng.",
-    form: "suggest/recommend/insist that + subject + base verb (trong cấu trúc giả định phù hợp).",
-    example: "The committee recommended that he be appointed.",
-    mistake: "The committee recommended that he is appointed. (trong cấu trúc giả định trang trọng)",
-    tip: "Động từ nguyên mẫu có thể dùng sau that trong subjunctive trang trọng.",
-    question: "They insisted that she ___ informed immediately.",
-    options: ["is", "be", "was"],
-    answer: 1, explanation: "Trong cấu trúc giả định trang trọng ở thể bị động, dùng be + V3."
-  },
-  {
-    level: "C1", title: "Ellipsis and Substitution",
-    use: "Lược bỏ phần đã rõ hoặc thay thế để tránh lặp từ.",
-    form: "Dùng do so, one/ones, so/not và lược bỏ thành phần khi ngữ cảnh đủ rõ.",
-    example: "She said she would help, and she did so.",
-    mistake: "He likes the red shirt, and I like the red shirt too. (lặp không cần thiết trong ngữ cảnh phù hợp)",
-    tip: "Lựa chọn cấu trúc thay thế phụ thuộc vào phần được thay và văn cảnh.",
-    question: "She promised to call, and she ___ .",
-    options: ["did so", "did it so", "so did"],
-    answer: 0, explanation: "Did so thay cho hành động đã được nhắc đến là promised to call."
-  },
-  {
-    level: "C2", title: "Advanced Information Structure",
-    use: "Sắp xếp thông tin để tạo trọng tâm, tương phản hoặc mạch lập luận rõ ràng.",
-    form: "Có thể dùng fronting, clefting và cấu trúc tương phản; cần xét văn cảnh và sắc thái.",
-    example: "What matters most is how the evidence is interpreted.",
-    mistake: "Dùng đảo ngữ hoặc nhấn mạnh liên tục khiến văn bản thiếu tự nhiên.",
-    tip: "Cấu trúc nâng cao chỉ hiệu quả khi phục vụ mục đích giao tiếp.",
-    question: "Which sentence most naturally emphasizes the main issue?",
-    options: ["What matters is the evidence.", "The evidence what matters is.", "Is what matters the evidence."],
-    answer: 0, explanation: "What matters is... là cấu trúc nhấn mạnh tự nhiên và đúng ngữ pháp."
-  },
-  {
-    level: "C2", title: "Register and Grammatical Nuance",
-    use: "Lựa chọn cấu trúc theo mức độ trang trọng, mục đích và sắc thái.",
-    form: "So sánh cách diễn đạt trực tiếp, giảm nhẹ, trang trọng và thân mật theo ngữ cảnh.",
-    example: "Would you mind clarifying this point? (lịch sự) / Clarify this point. (trực tiếp)",
-    mistake: "Dùng câu mệnh lệnh trực tiếp trong mọi tình huống giao tiếp.",
-    tip: "Đúng ngữ pháp chưa đủ; cần phù hợp người nghe và tình huống.",
-    question: "Which request is generally more polite?",
-    options: ["Explain this now.", "Would you mind explaining this?", "You explain this."],
-    answer: 1, explanation: "Would you mind + V-ing thường được dùng để đưa ra yêu cầu lịch sự."
-  },
-  {
-    level: "C2", title: "Complex Syntax and Ambiguity",
-    use: "Kiểm soát mệnh đề lồng nhau, quan hệ bổ nghĩa và tính rõ nghĩa trong câu phức.",
-    form: "Đặt mệnh đề bổ nghĩa gần thành phần được bổ nghĩa; kiểm tra chủ thể, phạm vi và quan hệ logic.",
-    example: "The report that the committee published yesterday was revised.",
-    mistake: "The report was revised that the committee published yesterday.",
-    tip: "Câu dài cần rõ quan hệ giữa các mệnh đề, không chỉ cần nhiều cấu trúc phức.",
-    question: "Which sentence places the relative clause correctly?",
-    options: ["The book that I borrowed is useful.", "The book is useful that I borrowed.", "That I borrowed the book is useful. (khác nghĩa)"],
-    answer: 0, explanation: "Mệnh đề quan hệ that I borrowed đứng ngay sau danh từ the book."
-  }
-];
-
-function renderGrammarTopics() {
-  const level = grammarLevel.value;
-  const lessons = grammarLessons.filter(item => item.level === level);
-
-  grammarTopic.innerHTML = "";
-
-  lessons.forEach((lesson, index) => {
-    const option = document.createElement("option");
-    option.value = String(index);
-    option.textContent = lesson.title;
-    grammarTopic.appendChild(option);
-  });
-
-  renderGrammarLesson();
-}
-
-function renderGrammarLesson() {
-  const lessons = grammarLessons.filter(
-    item => item.level === grammarLevel.value
-  );
-  const lesson = lessons[Number(grammarTopic.value)];
-
-  if (!lesson) {
-    grammarLesson.textContent = "Chưa có bài học ở cấp độ này.";
-    return;
-  }
-
-  grammarLesson.innerHTML = `
-    <h4>${lesson.title}</h4>
-    <p><strong>Level:</strong> ${lesson.level}</p>
-    <p><strong>Use / Cách dùng:</strong> ${lesson.use}</p>
-    <p><strong>Form / Cấu trúc:</strong> ${lesson.form}</p>
-    <p><strong>Example / Ví dụ:</strong> ${lesson.example}</p>
-    <p><strong>Common mistake / Lỗi thường gặp:</strong> ${lesson.mistake}</p>
-    <p><strong>Remember / Ghi nhớ:</strong> ${lesson.tip}</p>
-    <hr>
-    <h4>Practice / Luyện tập</h4>
-    <p>${lesson.question}</p>
-    <form id="grammar-quiz">
-      ${lesson.options.map((option, index) => `
-        <label>
-          <input type="radio" name="grammar-answer" value="${index}" required>
-          ${option}
-        </label>
-      `).join("")}
-      <button type="submit">Check answer / Kiểm tra</button>
-    </form>
-    <p id="grammar-feedback" role="status" aria-live="polite"></p>
-  `;
-
-  document.getElementById("grammar-quiz").addEventListener("submit", event => {
-    event.preventDefault();
-    const chosen = Number(
-      new FormData(event.currentTarget).get("grammar-answer")
-    );
-    const feedback = document.getElementById("grammar-feedback");
-
-    if (chosen === lesson.answer) {
-      feedback.textContent = "Correct! / Chính xác! " + lesson.explanation;
-    } else {
-      feedback.textContent =
-        "Not quite. / Chưa đúng. " +
-        "Đáp án đúng: " + lesson.options[lesson.answer] + ". " +
-        lesson.explanation;
-    }
-  });
-}
-
-grammarLevel.addEventListener("change", renderGrammarTopics);
-grammarTopic.addEventListener("change", renderGrammarLesson);
-renderGrammarTopics();
-
+document.addEventListener("click",e=>{
+ if(!e.target.closest(".settings-wrap")) settingsMenu.hidden=true;
+});
+document.getElementById("customizeButton").addEventListener("click",openCustomize);
+document.getElementById("accessibilityButton").addEventListener("click",()=>{
+ const enabled=body.classList.toggle("accessible");
+ document.getElementById("accessibilityButton").textContent=enabled?"✓ Normal Mode":"♿ Accessible Mode";
+ settingsMenu.hidden=true;
+});
+document.getElementById("closeDialog").addEventListener("click",closeCustomize);
+dialogBackdrop.addEventListener("click",e=>{if(e.target===dialogBackdrop)closeCustomize()});
+document.addEventListener("keydown",e=>{
+ if(e.key==="Escape"){
+  settingsMenu.hidden=true;
+  if(dialogBackdrop.classList.contains("show"))closeCustomize();
+ }
+});
+document.querySelectorAll(".swatch").forEach(button=>{
+ button.addEventListener("click",()=>applyColor(button.dataset.color));
+});
+colorInput.addEventListener("input",()=>applyColor(colorInput.value));
+upload.addEventListener("change",()=>{
+ const file=upload.files&&upload.files[0];
+ if(!file)return;
+ if(!["image/jpeg","image/png","image/webp"].includes(file.type)){
+  document.getElementById("settingsStatus").textContent="Vui lòng chọn ảnh JPG, PNG hoặc WebP.";
+  upload.value="";
+  return;
+ }
+ if(file.size>2*1024*1024){
+  document.getElementById("settingsStatus").textContent="Ảnh quá lớn. Hãy chọn ảnh tối đa 2 MB.";
+  upload.value="";
+  return;
+ }
+ const reader=new FileReader();
+ reader.onload=()=>{
+  pendingImage=String(reader.result);
+  preview.style.backgroundImage=`url("${pendingImage}")`;
+  document.getElementById("settingsStatus").textContent="Đã xem trước ảnh. Nhấn Lưu giao diện để áp dụng.";
+ };
+ reader.readAsDataURL(file);
+});
+document.getElementById("saveSettings").addEventListener("click",()=>{
+ const imageToSave=pendingImage!==null?pendingImage:currentImage;
+ const settings={color:colorInput.value,image:imageToSave};
+ try{
+  localStorage.setItem("oopsAppearance",JSON.stringify(settings));
+  applyColor(settings.color);
+  applyImage(settings.image);
+  pendingImage=null;
+  document.getElementById("settingsStatus").textContent="Đã lưu giao diện trên trình duyệt này.";
+ }catch(e){
+  document.getElementById("settingsStatus").textContent="Không thể lưu. Hãy thử ảnh nhỏ hơn hoặc xóa ảnh nền cũ.";
+ }
+});
+document.getElementById("resetSettings").addEventListener("click",()=>{
+ applyColor("#6c63ff");pendingImage=null;applyImage(null);upload.value="";
+ try{localStorage.removeItem("oopsAppearance")}catch(e){}
+ document.getElementById("settingsStatus").textContent="Đã khôi phục giao diện mặc định.";
+});
+document.querySelectorAll(".level").forEach(button=>{
+ button.addEventListener("click",()=>{
+  const level=button.dataset.level;
+  document.querySelectorAll(".level").forEach(b=>b.classList.toggle("active",b===button));
+  document.getElementById("sampleLevel").textContent=level;
+  document.getElementById("wrongSentence").textContent=levels[level].wrong;
+  document.getElementById("rightSentence").textContent=levels[level].right;
+  document.getElementById("explanation").textContent="💡 "+levels[level].why;
+  document.getElementById("levelTitle").textContent=level+" · "+levels[level].name;
+  document.getElementById("levelDescription").textContent=levels[level].desc;
+  document.getElementById("roadmapLink").textContent="Xem lộ trình "+level+" →";
+  document.getElementById("roadmapLink").href="roadmap.html";
+ });
+});
+loadSettings();
 </script>
 </body>
 </html>
