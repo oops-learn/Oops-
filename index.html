@@ -282,18 +282,6 @@ body.accessible a {
 <article class="card"><h3>Accessible Library</h3><p>Explore structured learning resources.</p><p>Coming soon</p></article>
 </div>
 </section>
-<section class="card" id="practice">
-<h2>Error Detective: A1 Grammar</h2>
-<p>Choose the correct sentence.</p>
-<form id="quiz">
-<label><input type="radio" name="answer" value="a" required> She go to school every day.</label>
-<label><input type="radio" name="answer" value="b"> She goes to school every day.</label>
-<label><input type="radio" name="answer" value="c"> She going to school every day.</label>
-<button type="submit">Check answer</button>
-</form>
-<p id="feedback" role="status" aria-live="polite"></p>
-</section>
-
 <section class="card" id="error-fix">
   <h2>Error Fix — Check Your English</h2>
   <p>
@@ -325,13 +313,6 @@ mode.addEventListener("click",()=>{
 const enabled=document.body.classList.toggle("accessible");
 mode.setAttribute("aria-pressed",String(enabled));
 mode.textContent=enabled?"Switch to Normal Mode":"Switch to Accessible Mode";
-});
-document.getElementById("quiz").addEventListener("submit",event=>{
-event.preventDefault();
-const answer=new FormData(event.currentTarget).get("answer");
-document.getElementById("feedback").textContent=answer==="b"
-?"Correct! With she, use goes in the present simple."
-:"Not quite. The correct answer is: She goes to school every day.";
 });
 
 const grammarTopic = document.getElementById("grammar-topic");
