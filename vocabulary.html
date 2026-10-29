@@ -1,0 +1,270 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vocabulary Lab | Oops!</title>
+<style>
+:root{--purple:#7157e8;--pink:#ff78a9;--ink:#292543;--muted:#716d86;--bg:#f7f5ff;--border:#e8e2fa}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.65}
+header{background:white;border-bottom:1px solid var(--border);padding:16px 6%;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.logo{font-size:28px;font-weight:900;color:var(--purple);text-decoration:none}
+a{color:var(--purple)}
+main{width:min(1000px,92%);margin:32px auto 60px}
+.hero{padding:30px;border-radius:22px;background:linear-gradient(120deg,#e8e3ff,#ffe7f0);margin-bottom:22px}
+.eyebrow{font-size:13px;letter-spacing:1.5px;color:var(--purple);font-weight:bold}
+h1{font-size:clamp(30px,5vw,44px);margin:8px 0}
+h2{margin-top:0}
+.muted{color:var(--muted)}
+.panel{background:white;border:1px solid var(--border);border-radius:20px;padding:24px;margin:20px 0}
+.filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}
+label{display:block;font-weight:bold;margin-bottom:6px}
+select,input[type=search]{width:100%;padding:12px;border:1px solid #cfc6ee;border-radius:12px;background:white;color:var(--ink);font:inherit}
+button{font:inherit;cursor:pointer}
+.primary{background:var(--purple);color:white;border:0;padding:11px 17px;border-radius:12px;font-weight:bold}
+.secondary{background:white;color:var(--purple);border:1px solid #d8cff8;padding:8px 12px;border-radius:10px}
+.word-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:18px}
+.word-card{background:white;border:1px solid var(--border);border-radius:16px;padding:18px}
+.word-card h3{margin:0;font-size:22px}
+.tag{display:inline-block;background:#f0edff;color:#6046d3;padding:3px 9px;border-radius:999px;font-size:12px;font-weight:bold}
+.example{background:#f4f1ff;border-radius:10px;padding:10px;margin:12px 0}
+.quiz-question{padding:16px 0;border-bottom:1px solid var(--border)}
+.quiz-question:last-child{border:0}
+.choice{display:flex;gap:10px;align-items:flex-start;padding:9px 12px;margin-top:7px;border:1px solid var(--border);border-radius:10px;cursor:pointer}
+.choice input{margin-top:6px}
+#result{padding:14px;border-radius:12px;background:#f0fbf6;margin-top:15px}
+footer{text-align:center;padding:25px;color:var(--muted)}
+button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #e58a00;outline-offset:3px}
+body.accessible{background:white;color:#111;font-size:19px;line-height:1.9}
+body.accessible .panel,body.accessible .word-card,body.accessible .hero{background:white;color:#111;border:2px solid #222;box-shadow:none}
+body.accessible .primary{background:#111;color:white}
+body.accessible .tag,body.accessible .example{background:#eee;color:#111}
+@media(max-width:600px){.hero,.panel{padding:19px}}
+</style>
+</head>
+<body>
+<header>
+<a class="logo" href="index.html">Oops!</a>
+<a href="index.html">← Back to Home</a>
+<button class="primary" id="modeBtn" type="button" aria-pressed="false">Switch to Accessible Mode</button>
+</header>
+
+<main>
+<section class="hero">
+<div class="eyebrow">OOPS! LEARNING SPACE</div>
+<h1>Vocabulary Lab</h1>
+<p>Build your vocabulary, one word at a time.</p>
+<p class="muted">Explore useful words, learn their meanings and practise using them in context.</p>
+</section>
+
+<section class="panel">
+<h2>01. Find your words</h2>
+<div class="filters">
+<div>
+<label for="level">English level</label>
+<select id="level">
+<option>A1</option><option>A2</option><option>B1</option>
+<option>B2</option><option>C1</option><option>C2</option>
+</select>
+</div>
+<div>
+<label for="search">Search words</label>
+<input id="search" type="search" placeholder="Search English or Vietnamese...">
+</div>
+</div>
+<p class="muted" id="wordCount" aria-live="polite"></p>
+<div class="word-grid" id="wordGrid"></div>
+</section>
+
+<section class="panel">
+<h2>02. Vocabulary Challenge</h2>
+<p class="muted">Choose the correct English meaning for each Vietnamese word.</p>
+<form id="quiz"></form>
+<button class="primary" id="checkBtn" type="button">Check my answers</button>
+<button class="secondary" id="retryBtn" type="button">Try again</button>
+<div id="result" role="status" aria-live="polite" hidden></div>
+</section>
+
+<section class="panel">
+<h2>03. My learning progress</h2>
+<p id="progress">Your quiz results will appear here after you complete a challenge.</p>
+<p class="muted">Progress is stored in this browser on this device. It is not yet linked to a student account.</p>
+<button class="secondary" id="clearProgress" type="button">Reset saved progress</button>
+</section>
+</main>
+<footer>Oops! — Make mistakes. Make progress.</footer>
+
+<script>
+const vocabulary={
+A1:[
+{word:"achieve",meaning:"đạt được",type:"verb",example:"You can achieve your goals with practice.",options:["đạt được","quên","mượn"],answer:0},
+{word:"careful",meaning:"cẩn thận",type:"adjective",example:"Be careful when you cross the road.",options:["ồn ào","cẩn thận","đói bụng"],answer:1},
+{word:"delicious",meaning:"ngon",type:"adjective",example:"The soup smells delicious.",options:["đắt tiền","nguy hiểm","ngon"],answer:2},
+{word:"environment",meaning:"môi trường",type:"noun",example:"We should protect the environment.",options:["môi trường","kỳ nghỉ","bữa sáng"],answer:0},
+{word:"improve",meaning:"cải thiện",type:"verb",example:"Reading helps improve your English.",options:["cải thiện","đóng cửa","đợi"],answer:0},
+{word:"journey",meaning:"chuyến đi",type:"noun",example:"Our journey took three hours.",options:["bài kiểm tra","chuyến đi","cuộc họp"],answer:1},
+{word:"polite",meaning:"lịch sự",type:"adjective",example:"It is polite to say thank you.",options:["lịch sự","lười biếng","lo lắng"],answer:0},
+{word:"borrow",meaning:"mượn",type:"verb",example:"Can I borrow your pen?",options:["cho mượn","mượn","bán"],answer:1}
+],
+A2:[
+{word:"advice",meaning:"lời khuyên",type:"noun",example:"My teacher gave me useful advice.",options:["lời khuyên","phần thưởng","lời mời"],answer:0},
+{word:"avoid",meaning:"tránh",type:"verb",example:"Try to avoid making the same mistake.",options:["chấp nhận","tránh","giải thích"],answer:1},
+{word:"confident",meaning:"tự tin",type:"adjective",example:"She feels confident before the exam.",options:["tự tin","thất vọng","kiệt sức"],answer:0},
+{word:"decision",meaning:"quyết định",type:"noun",example:"It was a difficult decision.",options:["lý do","quyết định","kết quả"],answer:1},
+{word:"habit",meaning:"thói quen",type:"noun",example:"Reading every day is a good habit.",options:["thói quen","mục tiêu","lỗi sai"],answer:0},
+{word:"purpose",meaning:"mục đích",type:"noun",example:"What is the purpose of this meeting?",options:["mục đích","phương pháp","cơ hội"],answer:0}
+],
+B1:[
+{word:"accomplish",meaning:"hoàn thành, đạt được",type:"verb",example:"She accomplished everything on her list.",options:["trì hoãn","hoàn thành","từ chối"],answer:1},
+{word:"benefit",meaning:"lợi ích",type:"noun",example:"Exercise has many health benefits.",options:["lợi ích","thử thách","thiệt hại"],answer:0},
+{word:"contribute",meaning:"đóng góp",type:"verb",example:"Students can contribute ideas to the project.",options:["phản đối","đóng góp","so sánh"],answer:1},
+{word:"essential",meaning:"thiết yếu",type:"adjective",example:"Sleep is essential for good health.",options:["không cần thiết","thiết yếu","hiếm gặp"],answer:1},
+{word:"maintain",meaning:"duy trì",type:"verb",example:"It is important to maintain a healthy routine.",options:["duy trì","phá hủy","thay thế"],answer:0},
+{word:"opportunity",meaning:"cơ hội",type:"noun",example:"The course offers an opportunity to practise.",options:["nguy cơ","cơ hội","nghĩa vụ"],answer:1}
+],
+B2:[
+{word:"compelling",meaning:"thuyết phục, hấp dẫn",type:"adjective",example:"The report provides compelling evidence.",options:["mơ hồ","thuyết phục","không liên quan"],answer:1},
+{word:"deteriorate",meaning:"xấu đi, suy giảm",type:"verb",example:"Air quality may deteriorate in winter.",options:["cải thiện","xấu đi","ổn định"],answer:1},
+{word:"inevitable",meaning:"không thể tránh khỏi",type:"adjective",example:"Some changes are inevitable.",options:["không thể tránh khỏi","không chắc chắn","tạm thời"],answer:0},
+{word:"justify",meaning:"biện minh, chứng minh là hợp lý",type:"verb",example:"How can we justify this decision?",options:["biện minh","bỏ qua","dự đoán"],answer:0},
+{word:"substantial",meaning:"đáng kể, lớn",type:"adjective",example:"The project requires substantial investment.",options:["nhỏ bé","đáng kể","không thường xuyên"],answer:1},
+{word:"undermine",meaning:"làm suy yếu",type:"verb",example:"False information can undermine public trust.",options:["củng cố","làm suy yếu","thay đổi"],answer:1}
+],
+C1:[
+{word:"ambiguous",meaning:"mơ hồ, đa nghĩa",type:"adjective",example:"The instructions were ambiguous.",options:["rõ ràng","mơ hồ","chính xác"],answer:1},
+{word:"contemplate",meaning:"suy ngẫm, cân nhắc",type:"verb",example:"She contemplated the consequences carefully.",options:["suy ngẫm","phớt lờ","thực hiện"],answer:0},
+{word:"detrimental",meaning:"có hại",type:"adjective",example:"Lack of sleep can be detrimental to learning.",options:["có lợi","có hại","không đáng kể"],answer:1},
+{word:"meticulous",meaning:"tỉ mỉ, kỹ lưỡng",type:"adjective",example:"He is meticulous about his research.",options:["bất cẩn","tỉ mỉ","thiếu kiên nhẫn"],answer:1},
+{word:"scrutinise",meaning:"xem xét kỹ lưỡng",type:"verb",example:"Researchers scrutinise the available evidence.",options:["xem xét kỹ","tóm tắt","phỏng đoán"],answer:0},
+{word:"viable",meaning:"khả thi",type:"adjective",example:"We need a viable solution.",options:["khả thi","không thể","tốn kém"],answer:0}
+],
+C2:[
+{word:"equivocal",meaning:"mập mờ, không rõ ràng",type:"adjective",example:"His response was equivocal.",options:["dứt khoát","mập mờ","nhiệt tình"],answer:1},
+{word:"intransigent",meaning:"cứng rắn, không nhượng bộ",type:"adjective",example:"The negotiators faced an intransigent opponent.",options:["dễ thỏa hiệp","không nhượng bộ","thiếu kinh nghiệm"],answer:1},
+{word:"ostensible",meaning:"bề ngoài, có vẻ là",type:"adjective",example:"The ostensible reason was a lack of time.",options:["rõ ràng và chân thực","bề ngoài, có vẻ là","hoàn toàn bí mật"],answer:1},
+{word:"perfunctory",meaning:"qua loa, chiếu lệ",type:"adjective",example:"He gave a perfunctory apology.",options:["qua loa","chân thành","chi tiết"],answer:0},
+{word:"pragmatic",meaning:"thực tế, thực dụng",type:"adjective",example:"They adopted a pragmatic approach.",options:["thiếu thực tế","thực tế","lý thuyết suông"],answer:1},
+{word:"ubiquitous",meaning:"có mặt ở khắp nơi",type:"adjective",example:"Smartphones have become ubiquitous.",options:["hiếm gặp","có mặt ở khắp nơi","lỗi thời"],answer:1}
+]
+};
+
+const level=document.getElementById("level");
+const search=document.getElementById("search");
+const grid=document.getElementById("wordGrid");
+const quiz=document.getElementById("quiz");
+const result=document.getElementById("result");
+const wordCount=document.getElementById("wordCount");
+const progress=document.getElementById("progress");
+
+function getWords(){return vocabulary[level.value]||[];}
+
+function renderWords(){
+const query=search.value.trim().toLowerCase();
+const words=getWords().filter(w=>
+w.word.toLowerCase().includes(query)||w.meaning.toLowerCase().includes(query)
+);
+grid.innerHTML="";
+wordCount.textContent=`${words.length} words shown · ${level.value} level`;
+if(!words.length){grid.textContent="No matching words. Try another search.";return;}
+words.forEach(w=>{
+const card=document.createElement("article");
+card.className="word-card";
+const title=document.createElement("h3");
+title.textContent=w.word;
+const tag=document.createElement("span");
+tag.className="tag";tag.textContent=w.type;
+const meaning=document.createElement("p");
+meaning.textContent=w.meaning;
+const example=document.createElement("div");
+example.className="example";
+const strong=document.createElement("strong");strong.textContent="Example: ";
+example.append(strong,document.createTextNode(w.example));
+const speak=document.createElement("button");
+speak.type="button";speak.className="secondary";speak.textContent="🔊 Listen";
+speak.setAttribute("aria-label",`Listen to ${w.word}`);
+speak.addEventListener("click",()=>{
+if(!("speechSynthesis" in window)){alert("Speech is not supported by this browser.");return;}
+window.speechSynthesis.cancel();
+const utterance=new SpeechSynthesisUtterance(w.word);
+utterance.lang="en-US";
+window.speechSynthesis.speak(utterance);
+});
+card.append(title,tag,meaning,example,speak);
+grid.appendChild(card);
+});
+}
+
+function renderQuiz(){
+quiz.innerHTML="";
+getWords().slice(0,5).forEach((w,i)=>{
+const section=document.createElement("fieldset");
+section.className="quiz-question";
+const legend=document.createElement("legend");
+legend.textContent=`${i+1}. What does "${w.word}" mean?`;
+section.appendChild(legend);
+w.options.forEach((option,j)=>{
+const label=document.createElement("label");label.className="choice";
+const radio=document.createElement("input");
+radio.type="radio";radio.name=`q${i}`;radio.value=String(j);
+label.append(radio,document.createTextNode(option));
+section.appendChild(label);
+});
+quiz.appendChild(section);
+});
+result.hidden=true;
+}
+
+function updateProgress(){
+let saved={attempts:0,correct:0};
+try{saved=JSON.parse(localStorage.getItem("oopsVocabularyProgress")||'{"attempts":0,"correct":0}');}catch{}
+const accuracy=saved.attempts?Math.round(saved.correct/saved.attempts*100):0;
+progress.textContent=`Questions answered: ${saved.attempts}. Correct answers: ${saved.correct}. Accuracy: ${accuracy}%.`;
+}
+
+level.addEventListener("change",()=>{renderWords();renderQuiz();});
+search.addEventListener("input",renderWords);
+
+document.getElementById("checkBtn").addEventListener("click",()=>{
+const words=getWords().slice(0,5);
+let score=0;
+let answered=0;
+let details="";
+words.forEach((w,i)=>{
+const selected=quiz.querySelector(`input[name="q${i}"]:checked`);
+const correct=selected&&Number(selected.value)===w.answer;
+if(selected)answered++;
+if(correct)score++;
+details+=`<p><strong>${i+1}. ${w.word}:</strong> ${correct?"Correct!":"Correct answer: "+w.meaning}</p>`;
+});
+if(answered<words.length){
+result.hidden=false;
+result.textContent="Please answer all five questions before checking your score.";
+return;
+}
+let saved={attempts:0,correct:0};
+try{saved=JSON.parse(localStorage.getItem("oopsVocabularyProgress")||'{"attempts":0,"correct":0}');}catch{}
+saved.attempts+=words.length;saved.correct+=score;
+try{localStorage.setItem("oopsVocabularyProgress",JSON.stringify(saved));}catch{}
+result.innerHTML=`<h3>Your score: ${score}/${words.length}</h3>${details}`;
+result.hidden=false;
+updateProgress();
+});
+
+document.getElementById("retryBtn").addEventListener("click",renderQuiz);
+document.getElementById("clearProgress").addEventListener("click",()=>{
+try{localStorage.removeItem("oopsVocabularyProgress");}catch{}
+updateProgress();result.hidden=true;
+});
+
+document.getElementById("modeBtn").addEventListener("click",function(){
+const enabled=document.body.classList.toggle("accessible");
+this.setAttribute("aria-pressed",String(enabled));
+this.textContent=enabled?"Switch to Normal Mode":"Switch to Accessible Mode";
+});
+
+renderWords();renderQuiz();updateProgress();
+</script>
+</body>
+</html>
