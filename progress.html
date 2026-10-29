@@ -1,0 +1,152 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Progress | Oops!</title>
+<style>
+:root{--purple:#7657e8;--pink:#ff80ab;--bg:#f8f6ff;--ink:#292344}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+header{background:white;padding:16px 6%;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;box-shadow:0 2px 12px #3020600d}
+.logo{font-size:26px;font-weight:900;color:var(--purple)}
+button,.btn{border:0;border-radius:12px;padding:11px 16px;background:var(--purple);color:white;font-weight:bold;cursor:pointer;text-decoration:none}
+main{max-width:1000px;margin:32px auto;padding:0 18px}
+.hero{background:linear-gradient(120deg,#e8e0ff,#ffe3ef);padding:28px;border-radius:24px;margin-bottom:22px}
+h1{margin:0 0 8px;font-size:clamp(28px,5vw,40px)}
+h2{margin-top:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px;margin:20px 0}
+.card{background:white;border:1px solid #eee8ff;border-radius:18px;padding:22px;box-shadow:0 5px 18px #30206008}
+.metric{font-size:32px;font-weight:900;color:var(--purple)}
+.small{color:#655e78;font-size:14px}
+.bar{height:12px;background:#eee9fb;border-radius:20px;overflow:hidden;margin:12px 0}
+.fill{height:100%;width:0;background:linear-gradient(90deg,var(--purple),var(--pink));border-radius:20px;transition:width .3s}
+.module{margin:20px 0}
+.row{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.notice{padding:14px;background:#fff7df;border-radius:12px;font-size:14px}
+body.accessible{background:#fff;color:#000;font-size:19px}
+body.accessible .hero{background:#fff;border:3px solid #000}
+body.accessible .card,body.accessible header{border:2px solid #000}
+body.accessible button,body.accessible .btn{background:#000;color:#fff;border:2px solid #fff;outline:2px solid #000}
+a:focus,button:focus{outline:3px solid #ff8c00;outline-offset:3px}
+@media(max-width:500px){header{padding:14px}main{margin:20px auto}.hero{padding:22px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">Oops!</div>
+  <div>
+    <a class="btn" href="index.html">← Trang chủ</a>
+    <button id="mode" type="button" aria-pressed="false">Accessible Mode</button>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <h1>My Learning Progress 📈</h1>
+    <p>The more mistakes you fix, the more progress you make!</p>
+    <p>The more you practise, the more you improve.</p>
+  </section>
+
+  <section class="grid" aria-label="Tổng quan tiến độ">
+    <article class="card">
+      <div class="small">Tổng số câu đã luyện</div>
+      <div class="metric" id="attempts">0</div>
+    </article>
+    <article class="card">
+      <div class="small">Số câu trả lời đúng</div>
+      <div class="metric" id="correct">0</div>
+    </article>
+    <article class="card">
+      <div class="small">Độ chính xác</div>
+      <div class="metric" id="accuracy">0%</div>
+    </article>
+  </section>
+
+  <section class="card">
+    <h2>Learning Overview</h2>
+    <div class="module">
+      <div class="row"><strong>Grammar Lab</strong><span id="grammarText">0/0 câu đúng</span></div>
+      <div class="bar" role="progressbar" aria-label="Tiến độ Grammar Lab" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="grammarBar"><div class="fill" id="grammarFill"></div></div>
+    </div>
+    <div class="module">
+      <div class="row"><strong>Vocabulary Lab</strong><span id="vocabText">0/0 câu đúng</span></div>
+      <div class="bar" role="progressbar" aria-label="Tiến độ Vocabulary Lab" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="vocabBar"><div class="fill" id="vocabFill"></div></div>
+    </div>
+  </section>
+
+  <section class="card" style="margin-top:20px">
+    <h2>🎯 Your Next Steps</h2>
+    <ul>
+      <li>Ôn lại những câu Grammar Lab bạn thường trả lời sai.</li>
+      <li>Học từ vựng mới và luyện phát âm trong Vocabulary Lab.</li>
+      <li>Làm bài luyện tập định kỳ để theo dõi sự tiến bộ.</li>
+    </ul>
+    <div class="row">
+      <a class="btn" href="grammar.html">Practice Grammar</a>
+      <a class="btn" href="vocabulary.html">Learn Vocabulary</a>
+      <a class="btn" href="error-fix.html">Try Error Fix</a>
+    </div>
+  </section>
+
+  <p class="notice" role="note">
+    Lưu ý: Trang này đọc số liệu được lưu trên trình duyệt hiện tại. Số liệu chỉ bao gồm những lượt luyện tập mà các trang học đã ghi nhận; đây chưa phải lịch sử theo ngày và chưa đồng bộ giữa các thiết bị.
+  </p>
+  <p id="status" role="status" aria-live="polite"></p>
+  <button type="button" id="refresh">↻ Refresh statistics</button>
+</main>
+
+<script>
+const readStats = (key) => {
+  try {
+    const value = JSON.parse(localStorage.getItem(key) || "{}");
+    return {
+      attempts: Math.max(0, Number(value.attempts) || 0),
+      correct: Math.max(0, Number(value.correct) || 0)
+    };
+  } catch {
+    return { attempts: 0, correct: 0 };
+  }
+};
+
+function showModule(prefix, stats) {
+  const accuracy = stats.attempts ? Math.round(stats.correct / stats.attempts * 100) : 0;
+  document.getElementById(prefix + "Text").textContent =
+    `${stats.correct}/${stats.attempts} câu đúng · ${accuracy}%`;
+  document.getElementById(prefix + "Fill").style.width = accuracy + "%";
+  const bar = document.getElementById(prefix + "Bar");
+  bar.setAttribute("aria-valuenow", accuracy);
+}
+
+function refreshStats() {
+  const grammar = readStats("oopsGrammarProgress");
+  const vocab = readStats("oopsVocabularyProgress");
+  const attempts = grammar.attempts + vocab.attempts;
+  const correct = grammar.correct + vocab.correct;
+  const accuracy = attempts ? Math.round(correct / attempts * 100) : 0;
+
+  document.getElementById("attempts").textContent = attempts;
+  document.getElementById("correct").textContent = correct;
+  document.getElementById("accuracy").textContent = accuracy + "%";
+  showModule("grammar", grammar);
+  showModule("vocab", vocab);
+
+  document.getElementById("status").textContent = attempts
+    ? "Đã cập nhật thống kê."
+    : "Chưa có dữ liệu luyện tập. Hãy làm bài ở Grammar Lab hoặc Vocabulary Lab trước nhé.";
+}
+
+document.getElementById("refresh").addEventListener("click", refreshStats);
+
+const mode = document.getElementById("mode");
+mode.addEventListener("click", () => {
+  const enabled = document.body.classList.toggle("accessible");
+  mode.setAttribute("aria-pressed", String(enabled));
+  mode.textContent = enabled ? "Normal Mode" : "Accessible Mode";
+});
+
+refreshStats();
+</script>
+</body>
+</html>
