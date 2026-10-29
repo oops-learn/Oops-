@@ -661,6 +661,289 @@
     };
     Object.keys(extraCurriculum).forEach(level => curriculum[level].push(...extraCurriculum[level]));
 
+const advancedCurriculum = {
+  A1: [
+    {
+      title: "Verb To Be: Am, Is, Are",
+      rule: "Use am, is and are to describe people, things, feelings and situations.",
+      form: "I am; he/she/it is; you/we/they are. Negative: am not/isn't/aren't. Questions: Am/Is/Are + subject?",
+      examples: ["She is a student.", "Are they at home?"],
+      questions: [
+        {text:"My brother ___ 15 years old.",options:["am","is","are"],answer:1,why:"Use is with he, she, it and singular nouns."},
+        {text:"___ you ready?",options:["Is","Am","Are"],answer:2,why:"Use are with you."},
+        {text:"They ___ tired.",options:["isn't","aren't","am not"],answer:1,why:"Use aren't for negative sentences with they."}
+      ]
+    },
+    {
+      title: "Present Simple: Negatives and Questions",
+      rule: "Use do/does to form negatives and questions in the Present Simple. The main verb stays in its base form after does.",
+      form: "don't/doesn't + base verb; Do/Does + subject + base verb?",
+      examples: ["He doesn't play tennis.", "Does she speak English?"],
+      questions: [
+        {text:"She ___ like coffee.",options:["don't","doesn't","isn't"],answer:1,why:"Use doesn't with he, she or it."},
+        {text:"___ your parents work here?",options:["Does","Do","Are"],answer:1,why:"Use do with plural subjects."},
+        {text:"Does he ___ football?",options:["plays","playing","play"],answer:2,why:"After does, use the base verb."}
+      ]
+    },
+    {
+      title: "Object Pronouns",
+      rule: "Object pronouns receive the action of a verb or follow a preposition.",
+      form: "I → me; he → him; she → her; we → us; they → them.",
+      examples: ["Please help me.", "I went with them."],
+      questions: [
+        {text:"I called Anna yesterday. I called ___.",options:["she","her","hers"],answer:1,why:"Her is the object pronoun for a female person."},
+        {text:"Can you help ___?",options:["I","my","me"],answer:2,why:"Use me as the object of help."},
+        {text:"We invited Tom and Jack. We invited ___.",options:["they","them","their"],answer:1,why:"Them replaces a plural object."}
+      ]
+    },
+    {
+      title: "Adverbs of Frequency",
+      rule: "Adverbs such as always, usually, often, sometimes and never describe how frequently something happens.",
+      form: "Usually before the main verb, but after the verb to be.",
+      examples: ["I usually walk to school.", "She is always friendly."],
+      questions: [
+        {text:"He ___ gets up early.",options:["usually","is usually","usual"],answer:0,why:"Place usually before the main verb gets."},
+        {text:"She is ___ late.",options:["never","never is","not never"],answer:0,why:"Frequency adverbs usually follow the verb to be."},
+        {text:"I ___ eat breakfast before school.",options:["am often","often","often am"],answer:1,why:"Often normally comes before the main verb eat."}
+      ]
+    },
+    {
+      title: "Prepositions of Place",
+      rule: "Use in for an enclosed space, on for a surface and under for a lower position.",
+      form: "preposition + noun",
+      examples: ["The keys are on the table.", "The cat is under the chair."],
+      questions: [
+        {text:"The picture is ___ the wall.",options:["on","in","under"],answer:0,why:"On describes something attached to a surface."},
+        {text:"The milk is ___ the fridge.",options:["at","in","on"],answer:1,why:"In describes something inside an enclosed space."},
+        {text:"The shoes are ___ the bed.",options:["under","between","into"],answer:0,why:"Under means below something."}
+      ]
+    }
+  ],
+  A2: [
+    {
+      title: "Present Perfect vs Past Simple",
+      rule: "Use the Past Simple for completed events at a finished past time. Use the Present Perfect for experiences or past events connected to the present.",
+      form: "Past Simple: subject + past verb. Present Perfect: have/has + past participle.",
+      examples: ["I visited Hue last year.", "I have visited Hue twice."],
+      questions: [
+        {text:"I ___ her yesterday.",options:["have seen","saw","have saw"],answer:1,why:"Yesterday is a finished past time."},
+        {text:"She has never ___ sushi.",options:["eat","ate","eaten"],answer:2,why:"Present Perfect uses the past participle."},
+        {text:"___ you ever been to Japan?",options:["Did","Have","Were"],answer:1,why:"Use Have you ever been to ask about experience."}
+      ]
+    },
+    {
+      title: "Quantifiers: Much, Many, A Few and A Little",
+      rule: "Use many and a few with countable plural nouns; use much and a little with uncountable nouns.",
+      form: "many/few + plural countable noun; much/little + uncountable noun.",
+      examples: ["There aren't many apples.", "We have a little time."],
+      questions: [
+        {text:"How ___ water do you drink?",options:["many","much","few"],answer:1,why:"Water is uncountable."},
+        {text:"There are ___ chairs in the room.",options:["much","a little","a few"],answer:2,why:"Chairs is a plural countable noun."},
+        {text:"We have very ___ time left.",options:["few","little","many"],answer:1,why:"Time is uncountable."}
+      ]
+    },
+    {
+      title: "Gerunds and Infinitives",
+      rule: "Some verbs are followed by an -ing form, while others are followed by to + infinitive.",
+      form: "enjoy/avoid + V-ing; want/decide + to-infinitive.",
+      examples: ["I enjoy reading.", "They decided to leave."],
+      questions: [
+        {text:"She enjoys ___ novels.",options:["read","reading","to read"],answer:1,why:"Enjoy is followed by a gerund."},
+        {text:"We decided ___ early.",options:["leave","leaving","to leave"],answer:2,why:"Decide is followed by a to-infinitive."},
+        {text:"He avoids ___ too much sugar.",options:["eating","to eat","eat"],answer:0,why:"Avoid is followed by a gerund."}
+      ]
+    },
+    {
+      title: "Too, Enough and So/Such",
+      rule: "Too means more than necessary; enough means sufficient. So modifies adjectives/adverbs, while such modifies noun phrases.",
+      form: "too + adjective; adjective + enough; so + adjective; such + (a/an) + adjective + noun.",
+      examples: ["The box is too heavy.", "She is old enough to drive."],
+      questions: [
+        {text:"This coffee is ___ hot to drink.",options:["enough","too","such"],answer:1,why:"Too hot means excessively hot."},
+        {text:"He isn't tall ___ to reach it.",options:["too","so","enough"],answer:2,why:"Enough follows the adjective."},
+        {text:"It was ___ an interesting book.",options:["such","so","too"],answer:0,why:"Such is used before an adjective + noun phrase."}
+      ]
+    }
+  ],
+  B1: [
+    {
+      title: "Past Perfect",
+      rule: "Use the Past Perfect for an action completed before another past action or time.",
+      form: "subject + had + past participle.",
+      examples: ["The train had left before we arrived.", "She had finished her work by six."],
+      questions: [
+        {text:"When I arrived, the film ___.",options:["started","had started","has started"],answer:1,why:"The film started before I arrived."},
+        {text:"They had ___ dinner before we came.",options:["eat","ate","eaten"],answer:2,why:"Had is followed by the past participle."},
+        {text:"By the time she called, I ___ home.",options:["had gone","go","have gone"],answer:0,why:"Past Perfect shows the earlier past action."}
+      ]
+    },
+    {
+      title: "Second and Third Conditionals",
+      rule: "The second conditional describes unreal present/future situations. The third conditional describes unreal past situations.",
+      form: "Second: if + Past Simple, would + base verb. Third: if + Past Perfect, would have + past participle.",
+      examples: ["If I had more time, I would travel.", "If we had left earlier, we would have caught the bus."],
+      questions: [
+        {text:"If I ___ a car, I would drive to school.",options:["have","had","had had"],answer:1,why:"Second conditional uses the Past Simple in the if-clause."},
+        {text:"If she had studied, she ___ the exam.",options:["would pass","would have passed","will pass"],answer:1,why:"Third conditional uses would have + past participle."},
+        {text:"If they ___ earlier, they wouldn't have missed the train.",options:["left","had left","would leave"],answer:1,why:"Use Past Perfect in the third conditional if-clause."}
+      ]
+    },
+    {
+      title: "Passive Voice: Present and Past",
+      rule: "Use the passive when the action or receiver is more important than the person doing it.",
+      form: "Present: am/is/are + past participle. Past: was/were + past participle.",
+      examples: ["English is spoken worldwide.", "The window was broken yesterday."],
+      questions: [
+        {text:"These cars ___ in Japan.",options:["make","are made","made"],answer:1,why:"Present Simple passive uses are + past participle."},
+        {text:"The letter ___ yesterday.",options:["was sent","sent","is send"],answer:0,why:"Past Simple passive uses was/were + past participle."},
+        {text:"The rooms are ___ every day.",options:["clean","cleaned","cleaning"],answer:1,why:"Passive forms require the past participle."}
+      ]
+    },
+    {
+      title: "Indirect Questions",
+      rule: "Indirect questions sound more polite. Their embedded question uses statement word order.",
+      form: "Could you tell me + question word + subject + verb?",
+      examples: ["Where is the station? → Could you tell me where the station is?", "Do you know what time it starts?"],
+      questions: [
+        {text:"Could you tell me where the bank ___?",options:["is","is it","does"],answer:0,why:"Use statement word order in an indirect question."},
+        {text:"Do you know what time ___?",options:["does it start","it starts","starts it"],answer:1,why:"The subject comes before the verb."},
+        {text:"Can you tell me how much it ___?",options:["costs","does cost","cost"],answer:0,why:"Use normal statement word order."}
+      ]
+    }
+  ],
+  B2: [
+    {
+      title: "Mixed Conditionals",
+      rule: "Mixed conditionals connect an unreal past situation with a present result, or a present condition with a past result.",
+      form: "If + Past Perfect, would + base verb; other combinations depend on the intended meaning.",
+      examples: ["If I had studied medicine, I would be a doctor now.", "If she were more careful, she wouldn't have made that mistake."],
+      questions: [
+        {text:"If I had gone to bed earlier, I ___ less tired now.",options:["would be","would have been","will be"],answer:0,why:"An unreal past condition has a present result."},
+        {text:"If he were more organised, he ___ the deadline yesterday.",options:["wouldn't miss","wouldn't have missed","won't miss"],answer:1,why:"A present characteristic is linked to a past result."},
+        {text:"If they had saved money, they ___ a house now.",options:["could afford","could have afforded","can afford"],answer:0,why:"The past condition affects the present result."}
+      ]
+    },
+    {
+      title: "Participle Clauses",
+      rule: "Participle clauses can shorten sentences when the understood subject is the same.",
+      form: "V-ing for active meaning; past participle for passive meaning; having + past participle for an earlier completed action.",
+      examples: ["Walking home, I saw an old friend.", "Having finished her work, she went out."],
+      questions: [
+        {text:"___ the instructions, he began the task.",options:["Read","Having read","Have read"],answer:1,why:"Having read shows an action completed before the next one."},
+        {text:"___ by the news, she said nothing.",options:["Shocking","Shocked","Shock"],answer:1,why:"Shocked is a past participle describing her reaction."},
+        {text:"___ down the street, we saw a parade.",options:["Walking","Walked","To walking"],answer:0,why:"Walking introduces an active participle clause."}
+      ]
+    },
+    {
+      title: "Wish, If Only and Regret",
+      rule: "Use past forms for wishes about the present, Past Perfect for past regrets, and would for desired changes.",
+      form: "wish + Past Simple; wish + Past Perfect; wish + would + base verb.",
+      examples: ["I wish I knew the answer.", "She wishes she had accepted the offer."],
+      questions: [
+        {text:"I wish I ___ more confident.",options:["am","were","will be"],answer:1,why:"A past form expresses an unreal present wish."},
+        {text:"He wishes he ___ the truth earlier.",options:["had told","tells","would tell"],answer:0,why:"Past Perfect expresses regret about the past."},
+        {text:"I wish it ___ raining.",options:["would stop","will stop","stops"],answer:0,why:"Wish + would expresses a desired change."}
+      ]
+    },
+    {
+      title: "Advanced Linking and Emphasis",
+      rule: "Formal writing uses linking expressions to show contrast, cause, result and concession precisely.",
+      form: "despite/in spite of + noun or V-ing; although + clause; therefore/consequently + result.",
+      examples: ["Despite the delay, the event continued.", "The evidence was limited; therefore, the conclusion remained cautious."],
+      questions: [
+        {text:"___ the heavy rain, the match continued.",options:["Although","Despite","However"],answer:1,why:"Despite is followed by a noun phrase."},
+        {text:"The sample was small; ___, the findings are tentative.",options:["therefore","although","despite"],answer:0,why:"Therefore introduces a result."},
+        {text:"___ he was exhausted, he continued working.",options:["Despite","Although","Nevertheless"],answer:1,why:"Although is followed by a clause."}
+      ]
+    }
+  ],
+  C1: [
+    {
+      title: "Subjunctive in Formal English",
+      rule: "The mandative subjunctive appears in formal recommendations, demands and requirements.",
+      form: "suggest/recommend/insist that + subject + base verb; be is used for all subjects.",
+      examples: ["They recommended that he be present.", "It is essential that everyone arrive on time."],
+      questions: [
+        {text:"The committee recommended that she ___ appointed.",options:["is","be","was"],answer:1,why:"Formal mandative subjunctive uses the base form be."},
+        {text:"It is vital that he ___ informed immediately.",options:["is","be","was"],answer:1,why:"Use the base verb after this formal structure."},
+        {text:"They insisted that the report ___ revised.",options:["be","is","was"],answer:0,why:"The mandative subjunctive uses be + past participle in the passive."}
+      ]
+    },
+    {
+      title: "Cleft Sentences",
+      rule: "Cleft sentences emphasise one part of a sentence.",
+      form: "It is/was + focus + that/who...; What + clause + be + focus.",
+      examples: ["It was Mia who solved the problem.", "What we need is more time."],
+      questions: [
+        {text:"It was John ___ called me.",options:["which","who","where"],answer:1,why:"Who refers to a person in this cleft sentence."},
+        {text:"What I need ___ a quiet place.",options:["are","be","is"],answer:2,why:"The what-clause is treated as a singular subject here."},
+        {text:"It was yesterday ___ we met.",options:["that","who","whose"],answer:0,why:"That introduces the focused time expression."}
+      ]
+    },
+    {
+      title: "Nominalisation",
+      rule: "Nominalisation turns verbs or adjectives into nouns and is common in formal and academic writing.",
+      form: "decide → decision; analyse → analysis; efficient → efficiency.",
+      examples: ["They decided quickly. → Their decision was quick.", "The team analysed the data. → The team's analysis of the data..."],
+      questions: [
+        {text:"The noun form of 'analyse' is ___.",options:["analysation","analysis","analystic"],answer:1,why:"Analysis is the standard noun form."},
+        {text:"The noun form of 'efficient' is ___.",options:["efficiency","efficiently","efficience"],answer:0,why:"Efficiency is the noun."},
+        {text:"The noun form of 'decide' is ___.",options:["decisive","decision","decidingly"],answer:1,why:"Decision is the noun formed from decide."}
+      ]
+    },
+    {
+      title: "Advanced Reporting Structures",
+      rule: "Reporting verbs describe claims, advice, accusations and conclusions using different grammatical patterns.",
+      form: "claim to have done; accuse someone of doing; urge someone to do; deny doing.",
+      examples: ["She claimed to have seen the document.", "He was accused of leaking the information."],
+      questions: [
+        {text:"They accused him ___ cheating.",options:["for","of","to"],answer:1,why:"Accuse someone of doing something."},
+        {text:"She claimed ___ the email earlier.",options:["to have sent","sending to","send"],answer:0,why:"Claim can take a perfect infinitive for an earlier action."},
+        {text:"The teacher urged us ___ carefully.",options:["work","working","to work"],answer:2,why:"Urge someone to do something."}
+      ]
+    }
+  ],
+  C2: [
+    {
+      title: "Advanced Modality and Hedging",
+      rule: "Formal English uses modal and hedging expressions to show degrees of certainty, possibility and caution.",
+      form: "may/might/could; appears/seems to; is likely/unlikely to; would appear to.",
+      examples: ["The results may indicate a wider trend.", "The explanation would appear to be incomplete."],
+      questions: [
+        {text:"The evidence ___ suggest a different explanation.",options:["might","must to","is can"],answer:0,why:"Might expresses cautious possibility."},
+        {text:"The claim appears ___ supported by the data.",options:["be","to be","being"],answer:1,why:"Appear can be followed by a to-infinitive."},
+        {text:"The results are likely ___ affected by the sample size.",options:["to be","being","be"],answer:0,why:"Likely is followed by a to-infinitive."}
+      ]
+    },
+    {
+      title: "Advanced Concession",
+      rule: "Formal concession structures acknowledge an opposing point while maintaining the main argument.",
+      form: "Much as + clause; however + adjective/adverb + subject + verb; be that as it may.",
+      examples: ["Much as I admire the proposal, it has limitations.", "Be that as it may, further research is needed."],
+      questions: [
+        {text:"___ I respect his opinion, I disagree with his conclusion.",options:["Much as","Despite","Nevertheless"],answer:0,why:"Much as introduces a concessive clause."},
+        {text:"Be that as it ___, we must proceed.",options:["may","might be","does"],answer:0,why:"Be that as it may is a fixed formal expression."},
+        {text:"However convincing the argument ___, evidence is still needed.",options:["seems","seem","seeming"],answer:0,why:"The singular subject argument takes seems."}
+      ]
+    },
+    {
+      title: "Formal Sentence Transformation",
+      rule: "Advanced transformations preserve meaning while changing emphasis, formality or grammatical structure.",
+      form: "Practise inversion, cleft structures, passive reporting and conditional alternatives without changing the original meaning.",
+      examples: ["As soon as he arrived, it started. → No sooner had he arrived than it started.", "People believe she is honest. → She is believed to be honest."],
+      questions: [
+        {text:"No sooner ___ than the lights went out.",options:["we arrived","had we arrived","we had arrived"],answer:1,why:"No sooner at the beginning requires inversion with had."},
+        {text:"She is believed ___ innocent.",options:["being","be","to be"],answer:2,why:"Passive reporting commonly uses be + past participle + to-infinitive."},
+        {text:"If I had known is closest in meaning to ___.",options:["Had I known","Should I know","Were I know"],answer:0,why:"Had I known is the inverted form of a third conditional."}
+      ]
+    }
+  ]
+};
+
+Object.keys(advancedCurriculum).forEach(level => {
+  curriculum[level].push(...advancedCurriculum[level]);
+});
+
     const levelSelect = document.getElementById("level");
     const topicSelect = document.getElementById("topicSelect");
     const topicButtons = document.getElementById("topicButtons");
