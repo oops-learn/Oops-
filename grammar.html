@@ -984,16 +984,7 @@ Object.keys(advancedCurriculum).forEach(level => {
         option.textContent = item.title;
         topicSelect.appendChild(option);
 
-        const button = document.createElement("button");
-        button.type = "button";
-        button.className = "topic";
-        button.textContent = item.title;
-        button.setAttribute("aria-pressed", index === 0 ? "true" : "false");
-        button.addEventListener("click", () => {
-          topicSelect.value = String(index);
-          renderLesson();
-        });
-        topicButtons.appendChild(button);
+     // Chỉ giữ danh sách chủ điểm trong ô thả xuống.
       });
 
       topicSelect.value = "0";
