@@ -1,15 +1,25 @@
 
-/* Oops! — Shared design system */
+/* Oops! — Unified Design System */
 :root {
   --primary: #6c63ff;
+  --primary-hover: #554be8;
   --primary-soft: #eeecff;
   --ink: #302b49;
   --muted: #716c83;
   --card: #ffffff;
+  --page: #faf9ff;
   --border: #e8e4f3;
   --mint: #42c9b5;
+  --mint-soft: #e4fbf5;
   --coral: #ff7a90;
+  --coral-soft: #fff0f4;
+  --yellow-soft: #fff7d6;
+  --blue-soft: #eaf3ff;
   --radius: 22px;
+  --radius-sm: 14px;
+  --shadow: 0 10px 30px #302b490b;
+  --shadow-hover: 0 14px 34px #302b4918;
+  --content-width: 1100px;
 }
 
 * {
@@ -18,13 +28,15 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 90px;
 }
 
 body {
   margin: 0;
-  background: #faf9ff;
+  background: var(--page);
   color: var(--ink);
   font-family: "Be Vietnam Pro", system-ui, sans-serif;
+  font-size: 16px;
   line-height: 1.7;
 }
 
@@ -35,13 +47,35 @@ textarea {
   font: inherit;
 }
 
+button,
+select,
+input,
+textarea {
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
 a {
   color: var(--primary);
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--primary-hover);
 }
 
 :focus-visible {
   outline: 3px solid #ff8c00;
   outline-offset: 4px;
+}
+
+img,
+svg,
+video {
+  max-width: 100%;
 }
 
 header {
@@ -50,33 +84,50 @@ header {
 }
 
 .logo {
-  font-family: "Lexend", sans-serif;
+  font-family: "Lexend", "Be Vietnam Pro", sans-serif;
   font-weight: 800;
   color: var(--primary);
+  letter-spacing: -0.04em;
 }
 
 main {
-  width: min(1100px, 92%);
+  width: min(var(--content-width), 92%);
   margin: 36px auto 60px;
-}
-
-.hero {
-  background: linear-gradient(135deg, #eeecff, #fff0f4);
-  border: 1px solid #ffffff;
-  border-radius: 26px;
-  padding: 32px;
-  margin-bottom: 26px;
 }
 
 h1,
 h2,
-h3 {
+h3,
+h4 {
   font-family: "Lexend", "Be Vietnam Pro", sans-serif;
+  color: var(--ink);
   line-height: 1.3;
+  letter-spacing: -0.025em;
 }
 
 h1 {
   font-size: clamp(30px, 5vw, 44px);
+  margin-top: 0;
+}
+
+h2 {
+  font-size: clamp(23px, 3vw, 30px);
+}
+
+h3 {
+  font-size: 20px;
+}
+
+p {
+  overflow-wrap: anywhere;
+}
+
+.hero {
+  background: linear-gradient(135deg, var(--primary-soft), var(--coral-soft));
+  border: 1px solid #ffffff;
+  border-radius: 26px;
+  padding: 32px;
+  margin-bottom: 26px;
 }
 
 .panel,
@@ -87,14 +138,19 @@ section.panel {
   border-radius: var(--radius);
   padding: 24px;
   margin: 20px 0;
-  box-shadow: 0 10px 30px #302b490b;
+  box-shadow: var(--shadow);
 }
 
 button,
 .primary,
 .btn {
   border-radius: 999px;
-  transition: background .2s, transform .2s;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
 }
 
 button:hover,
@@ -104,22 +160,62 @@ button:hover,
 }
 
 .primary,
-button.primary {
+button.primary,
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   background: var(--primary);
   color: #fff;
   border: 1px solid var(--primary);
   padding: 12px 20px;
   font-weight: 800;
-  cursor: pointer;
+  text-decoration: none;
+}
+
+.primary:hover,
+button.primary:hover,
+.btn-primary:hover {
+  background: var(--primary-hover);
+  border-color: var(--primary-hover);
+  color: #fff;
+}
+
+button:disabled,
+input:disabled,
+select:disabled,
+textarea:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
 }
 
 select,
 input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]):not([type="file"]),
 textarea {
   max-width: 100%;
+  background: #fff;
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 11px 13px;
+}
+
+select {
+  min-height: 44px;
+}
+
+textarea {
+  width: 100%;
+  resize: vertical;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: var(--primary);
+}
+
+label {
+  cursor: pointer;
 }
 
 footer {
@@ -128,6 +224,137 @@ footer {
   color: var(--muted);
 }
 
+/* Common learning cards and topic lists */
+.grid,
+.cards,
+.card-grid,
+.topic-grid {
+  gap: 18px;
+}
+
+.card,
+.topic,
+.lesson-card,
+.feature-card,
+.stat-card {
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.card:hover,
+.topic:hover,
+.lesson-card:hover,
+.feature-card:hover {
+  border-color: #c9c3ff;
+  box-shadow: var(--shadow-hover);
+}
+
+.topic,
+.lesson-card,
+.feature-card,
+.stat-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--card);
+  padding: 18px;
+}
+
+.topic {
+  color: var(--ink);
+}
+
+.topic[aria-pressed="true"],
+.topic.active,
+nav a[aria-current="page"] {
+  background: var(--primary-soft);
+  border-color: var(--primary);
+  color: var(--primary-hover);
+  font-weight: 800;
+}
+
+.badge,
+.tag,
+.level-badge {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  border-radius: 999px;
+  padding: 4px 11px;
+  background: var(--primary-soft);
+  color: var(--primary-hover);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.muted,
+.description,
+.subtitle {
+  color: var(--muted);
+}
+
+/* Quiz and feedback */
+.question,
+fieldset.question {
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 18px;
+  margin: 18px 0;
+  background: #fff;
+}
+
+.question legend {
+  padding: 0 6px;
+  font-weight: 800;
+}
+
+.answers {
+  display: grid;
+  gap: 10px;
+}
+
+.answer {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 14px;
+  background: #fff;
+}
+
+.answer:has(input:checked) {
+  border-color: var(--primary);
+  background: var(--primary-soft);
+}
+
+.question-feedback {
+  margin-bottom: 0;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--blue-soft);
+}
+
+.question.correct {
+  border-color: #168568;
+}
+
+.question.incorrect {
+  border-color: #c2415d;
+}
+
+.results,
+#results {
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  background: var(--mint-soft);
+  color: #145c50;
+  font-weight: 800;
+}
+
+/* Accessible mode: preserve strong contrast and keyboard focus */
 body.accessible {
   background: #fff;
   color: #000;
@@ -139,11 +366,28 @@ body.accessible header,
 body.accessible .hero,
 body.accessible .panel,
 body.accessible .card,
-body.accessible section.panel {
+body.accessible section.panel,
+body.accessible .topic,
+body.accessible .lesson-card,
+body.accessible .feature-card,
+body.accessible .stat-card,
+body.accessible .question,
+body.accessible .answer {
   background: #fff;
   color: #000;
   border: 2px solid #000;
   box-shadow: none;
+}
+
+body.accessible h1,
+body.accessible h2,
+body.accessible h3,
+body.accessible h4,
+body.accessible .logo,
+body.accessible .muted,
+body.accessible .description,
+body.accessible .subtitle {
+  color: #000;
 }
 
 body.accessible a {
@@ -152,10 +396,47 @@ body.accessible a {
 }
 
 body.accessible button,
-body.accessible .primary {
+body.accessible .primary,
+body.accessible .btn,
+body.accessible select,
+body.accessible input,
+body.accessible textarea {
+  border: 2px solid #000;
+}
+
+body.accessible button,
+body.accessible .primary,
+body.accessible .btn-primary {
   background: #000;
   color: #fff;
+}
+
+body.accessible .topic[aria-pressed="true"],
+body.accessible .topic.active,
+body.accessible .answer:has(input:checked) {
+  background: #eee;
+  color: #000;
+  outline: 2px solid #000;
+}
+
+body.accessible .question-feedback,
+body.accessible .results,
+body.accessible #results {
+  background: #fff;
+  color: #000;
   border: 2px solid #000;
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }
 
 @media (max-width: 600px) {
@@ -173,7 +454,13 @@ body.accessible .primary {
   }
 
   button,
-  .primary {
+  .primary,
+  .btn {
     max-width: 100%;
+  }
+
+  .question,
+  fieldset.question {
+    padding: 14px;
   }
 }
