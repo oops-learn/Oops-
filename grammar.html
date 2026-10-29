@@ -253,12 +253,6 @@
       .filters { grid-template-columns: 1fr; }
       .primary, button.primary { width: 100%; margin-right: 0; }
     }
-  /* Hide duplicate grammar topic dropdown */
-#topicSelect,
-label[for="topicSelect"],
-#topicHelp {
-  display: none !important;
-}
   </style>
 </head>
 <body>
@@ -590,6 +584,82 @@ label[for="topicSelect"],
         }
       ]
     };
+
+
+    // Additional lessons to expand the A2-C2 curriculum.
+    const extraCurriculum = {
+      A2: [
+        {title:"Past Continuous",rule:"Use the Past Continuous for an action in progress at a time in the past, often interrupted by a shorter action.",form:"Subject + was/were + verb-ing; the interrupting action often uses Past Simple.",examples:["I was reading at 8 p.m.","We were walking when it started to rain."],questions:[
+          {text:"At 9 last night, I ___ a book.",options:["read","was reading","am reading"],answer:1,why:"An action in progress at a past time takes Past Continuous."},
+          {text:"They ___ football when it rained.",options:["were playing","played","are playing"],answer:0,why:"The longer background action uses were playing."},
+          {text:"While she ___, the phone rang.",options:["slept","was sleeping","is sleeping"],answer:1,why:"Was sleeping describes an action in progress."}]},
+        {title:"Must, Have to and Should",rule:"Must/have to express obligation; should gives advice. Mustn't means prohibition, while don't have to means no obligation.",form:"must/should + base verb; have/has to + base verb.",examples:["You should rest.","Students have to wear uniforms."],questions:[
+          {text:"You ___ wear a seat belt.",options:["have to","shouldn't","don't have to"],answer:0,why:"Have to expresses obligation."},
+          {text:"You look tired. You ___ sleep earlier.",options:["should","mustn't","don't have to"],answer:0,why:"Should gives advice."},
+          {text:"Lunch is provided, so you ___ bring food.",options:["mustn't","don't have to","should"],answer:1,why:"Don't have to means it is not necessary."}]},
+        {title:"Articles: A, An and The",rule:"Use a/an for a non-specific singular countable noun and the for something specific or already known.",form:"a + consonant sound; an + vowel sound; the + specific noun.",examples:["I saw a dog.","She ate an apple.","The dog was friendly."],questions:[
+          {text:"He is ___ honest person.",options:["a","an","the"],answer:1,why:"Honest begins with a vowel sound."},
+          {text:"Please close ___ door.",options:["a","an","the"],answer:2,why:"The refers to a specific door in this situation."},
+          {text:"I bought ___ new bag yesterday.",options:["a","an","the"],answer:0,why:"A introduces a singular countable noun."}]}
+      ],
+      B1: [
+        {title:"Second Conditional",rule:"Use the second conditional for an unreal or unlikely present/future situation.",form:"If + Past Simple, would + base verb.",examples:["If I had more time, I would learn Japanese.","If I were you, I'd apologise."],questions:[
+          {text:"If I ___ rich, I would travel.",options:["am","were","will be"],answer:1,why:"Use Past Simple for an unreal situation."},
+          {text:"She would buy it if it ___ cheaper.",options:["is","were","will be"],answer:1,why:"The if-clause uses Past Simple."},
+          {text:"If he studied more, he ___ better.",options:["gets","would get","will get"],answer:1,why:"The result clause uses would + base verb."}]},
+        {title:"Relative Clauses",rule:"Relative clauses add information about a noun: who for people, which for things, whose for possession.",form:"noun + who/which/that/whose/where + clause.",examples:["The girl who won is my cousin.","This is the house where I grew up."],questions:[
+          {text:"The man ___ lives next door is a doctor.",options:["which","who","where"],answer:1,why:"Who refers to a person."},
+          {text:"That's the book ___ I mentioned.",options:["which","whose","where"],answer:0,why:"Which can refer to a thing."},
+          {text:"The student ___ bag was lost reported it.",options:["who","whose","which"],answer:1,why:"Whose expresses possession."}]},
+        {title:"Reported Speech",rule:"Reported speech tells someone what another person said. Tenses often move back when the reporting verb is past.",form:"said (that) + clause; told + object + clause.",examples:["“I'm tired,” she said. → She said she was tired.","“I'll call,” he said. → He said he would call."],questions:[
+          {text:"“I am busy.” Tom said he ___ busy.",options:["is","was","has been"],answer:1,why:"Am commonly changes to was."},
+          {text:"“I will help.” She said she ___ help.",options:["will","would","can"],answer:1,why:"Will commonly changes to would."},
+          {text:"“I saw him.” Anna said she ___ him.",options:["had seen","has seen","sees"],answer:0,why:"Past Simple commonly backshifts to Past Perfect."}]}
+      ],
+      B2: [
+        {title:"Future Forms",rule:"Will often expresses spontaneous decisions or predictions; going to expresses plans/evidence-based predictions; Present Continuous can describe arrangements.",form:"will + base verb; be going to + base verb; be + verb-ing for arrangements.",examples:["I'll answer the phone.","We're meeting the teacher tomorrow."],questions:[
+          {text:"Look at those clouds! It ___ rain.",options:["is going to","will have","is"],answer:0,why:"Visible evidence supports going to."},
+          {text:"We ___ the dentist at 3; it's booked.",options:["see","are seeing","will seeing"],answer:1,why:"Present Continuous can describe a fixed arrangement."},
+          {text:"The phone is ringing. I ___ it.",options:["answer","will answer","am answered"],answer:1,why:"Will can express a spontaneous decision."}]},
+        {title:"Wish and If Only",rule:"Wish/if only express regret or a desire for a situation to be different.",form:"wish + Past Simple (present regret); wish + Past Perfect (past regret); wish + would (desired change).",examples:["I wish I knew the answer.","If only we had left earlier."],questions:[
+          {text:"I wish I ___ more time now.",options:["have","had","will have"],answer:1,why:"Use Past Simple for a present wish."},
+          {text:"She wishes she ___ harder last year.",options:["studied","had studied","would study"],answer:1,why:"Use Past Perfect for past regret."},
+          {text:"I wish the neighbours ___ making noise.",options:["would stop","stopped yesterday","will stop"],answer:0,why:"Wish + would can express a desired change."}]},
+        {title:"Causative: Have/Get Something Done",rule:"Use the causative when someone arranges for another person to do a service.",form:"have/get + object + past participle.",examples:["I had my phone repaired.","She is getting her hair cut."],questions:[
+          {text:"We had the windows ___ yesterday.",options:["clean","cleaned","cleaning"],answer:1,why:"The causative uses object + past participle."},
+          {text:"He will get his car ___.",options:["repair","repaired","repairing"],answer:1,why:"Get something done uses a past participle."},
+          {text:"I ___ my eyes tested last week.",options:["had","did","made"],answer:0,why:"Have + object + past participle describes arranging a service."}]}
+      ],
+      C1: [
+        {title:"Advanced Passive Structures",rule:"Passive forms work with modal verbs, perfect forms and reporting verbs for formal or impersonal style.",form:"modal + be + past participle; have/has been + past participle; it is said that...",examples:["The documents must be submitted by Friday.","It is believed that the painting is genuine."],questions:[
+          {text:"The report should ___ before publication.",options:["check","be checked","have checking"],answer:1,why:"Modal passive: should be + past participle."},
+          {text:"The files ___ already been sent.",options:["have","has","was"],answer:0,why:"Files is plural, so use have."},
+          {text:"The painting is believed ___ genuine.",options:["to be","being","be"],answer:0,why:"Is believed can be followed by to-infinitive."}]},
+        {title:"Reporting Verbs",rule:"Reporting verbs have different patterns: admit/deny + -ing; advise/warn + object + to-infinitive; suggest + -ing or that-clause.",form:"verb + gerund, object + to-infinitive, or that-clause according to the verb.",examples:["He denied taking the money.","They advised us to book early."],questions:[
+          {text:"She admitted ___ the mistake.",options:["to make","making","make"],answer:1,why:"Admit is followed by a gerund."},
+          {text:"They warned us ___ near the edge.",options:["not to stand","not standing","to not stood"],answer:0,why:"Warn + object + not to-infinitive."},
+          {text:"He suggested ___ a break.",options:["to take","take","taking"],answer:2,why:"Suggest can be followed by a gerund."}]},
+        {title:"Concession and Contrast",rule:"Concession structures show that one fact does not prevent another from being true.",form:"although/even though + clause; despite/in spite of + noun or -ing; nevertheless/however link clauses.",examples:["Although it rained, we went out.","Despite being tired, she continued."],questions:[
+          {text:"Despite ___ tired, he finished the report.",options:["he was","being","was"],answer:1,why:"Despite takes a noun phrase or gerund."},
+          {text:"___ the heavy traffic, we arrived on time.",options:["Although","Despite","Even though"],answer:1,why:"Despite is followed by a noun phrase."},
+          {text:"The plan was expensive. ___, it was approved.",options:["Despite","Nevertheless","Although"],answer:1,why:"Nevertheless links contrasting sentences."}]}
+      ],
+      C2: [
+        {title:"Advanced Inversion",rule:"Negative or restrictive expressions at the beginning of a clause can trigger inversion for emphasis.",form:"Only then/Not until/Rarely + auxiliary + subject + verb.",examples:["Only then did we understand.","Little did she realise the impact."],questions:[
+          {text:"Only when the results arrived ___ the cause.",options:["we understood","did we understand","we did understood"],answer:1,why:"Only when at the beginning triggers inversion in the main clause."},
+          {text:"Little ___ that the decision would change everything.",options:["they knew","did they know","they did knew"],answer:1,why:"Little at the beginning requires inversion."},
+          {text:"Not until midnight ___ home.",options:["he returned","did he return","he did returned"],answer:1,why:"Not until triggers inversion in the main clause."}]},
+        {title:"Nuanced Modal Perfects",rule:"Modal perfects express deduction, criticism, regret or unreal possibilities about the past.",form:"modal + have + past participle; needn't have + past participle.",examples:["You should have checked the figures.","She might have missed the train."],questions:[
+          {text:"You ___ told me earlier.",options:["should have","should","must"],answer:0,why:"Should have expresses criticism or regret about the past."},
+          {text:"He ___ forgotten about the meeting.",options:["might have","must to","should"],answer:0,why:"Might have expresses a possible past explanation."},
+          {text:"We needn't ___ so much food.",options:["buy","have bought","bought"],answer:1,why:"Needn't have + past participle means the action was unnecessary."}]},
+        {title:"Conditional Inversion",rule:"Formal conditionals can omit if and use inversion.",form:"Had + subject + past participle; Should + subject + base verb; Were + subject + to-infinitive.",examples:["Had I known, I would have acted differently.","Should you need help, contact us."],questions:[
+          {text:"___ I known, I would have acted differently.",options:["Had","Have","Did"],answer:0,why:"Had I known is an inverted third conditional."},
+          {text:"Should you ___ assistance, call us.",options:["needed","need","needing"],answer:1,why:"Should is followed by the subject and base verb."},
+          {text:"Were she ___ apply, she would need a reference.",options:["to","for","at"],answer:0,why:"Were + subject + to-infinitive forms a formal hypothetical conditional."}]}
+      ]
+    };
+    Object.keys(extraCurriculum).forEach(level => curriculum[level].push(...extraCurriculum[level]));
 
     const levelSelect = document.getElementById("level");
     const topicSelect = document.getElementById("topicSelect");
