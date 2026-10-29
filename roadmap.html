@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roadmap | Oops!</title>
+<style>
+:root{--purple:#7657e8;--pink:#ff80ab;--ink:#292344;--bg:#f8f6ff}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.65}
+header{padding:16px 6%;background:#fff;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;box-shadow:0 2px 12px #3020600d}
+.logo{font-size:27px;font-weight:900;color:var(--purple)}
+button,.btn{border:0;border-radius:12px;padding:11px 15px;background:var(--purple);color:#fff;font-weight:bold;cursor:pointer;text-decoration:none;display:inline-block}
+main{max-width:1000px;margin:30px auto;padding:0 18px}
+.hero{padding:30px;border-radius:24px;background:linear-gradient(120deg,#e8e0ff,#ffe3ef)}
+h1{font-size:clamp(29px,5vw,42px);line-height:1.2;margin:0 0 12px}
+h2{margin-top:0}
+.levels{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:17px;margin:24px 0}
+.card{background:#fff;border:1px solid #eee8ff;border-radius:18px;padding:22px;box-shadow:0 5px 18px #30206008}
+.tag{display:inline-block;background:#eee8ff;color:#5c43c7;padding:4px 11px;border-radius:20px;font-weight:bold;margin-bottom:10px}
+.card ul{padding-left:21px}
+.card li{margin:7px 0}
+.tip{background:#fff7df;border-radius:16px;padding:18px;margin:20px 0}
+a:focus,button:focus{outline:3px solid #ff8c00;outline-offset:3px}
+body.accessible{background:#fff;color:#000;font-size:19px}
+body.accessible .hero{background:#fff;border:3px solid #000}
+body.accessible .card,body.accessible header{border:2px solid #000}
+body.accessible button,body.accessible .btn{background:#000;color:#fff}
+@media(max-width:500px){header{padding:14px}main{margin:20px auto}.hero{padding:22px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">Oops!</div>
+  <div>
+    <a class="btn" href="index.html">← Trang chủ</a>
+    <button id="mode" type="button" aria-pressed="false">Accessible Mode</button>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <h1>Your English Learning Roadmap 🚀</h1>
+    <p>Make mistakes. Make progress.</p>
+    <p>Lộ trình tham khảo giúp bạn xác định nội dung nên học ở từng trình độ, từ cơ bản đến nâng cao.</p>
+  </section>
+
+  <section class="levels" aria-label="Lộ trình các trình độ tiếng Anh">
+    <article class="card">
+      <span class="tag">A1 · Beginner</span>
+      <h2>Bắt đầu từ nền tảng</h2>
+      <ul>
+        <li>Ngữ pháp cơ bản: động từ to be, Present Simple, Present Continuous.</li>
+        <li>Đại từ, sở hữu, danh từ số ít và số nhiều.</li>
+        <li>Từ vựng về bản thân, gia đình, trường học, đồ vật và hoạt động hằng ngày.</li>
+        <li>Luyện viết câu đơn và nhận diện lỗi sai phổ biến.</li>
+      </ul>
+      <p><strong>Mục tiêu:</strong> Hiểu và sử dụng những câu đơn giản trong tình huống quen thuộc.</p>
+    </article>
+
+    <article class="card">
+      <span class="tag">A2 · Elementary</span>
+      <h2>Mở rộng khả năng giao tiếp</h2>
+      <ul>
+        <li>Past Simple, cấu trúc so sánh và diễn đạt kế hoạch tương lai.</li>
+        <li>Từ vựng về sở thích, sức khỏe, mua sắm, du lịch và môi trường sống.</li>
+        <li>Viết đoạn văn ngắn, kể lại sự việc và mô tả trải nghiệm.</li>
+        <li>Luyện phân biệt các cấu trúc dễ nhầm.</li>
+      </ul>
+      <p><strong>Mục tiêu:</strong> Giao tiếp trong những tình huống quen thuộc và diễn đạt nhu cầu cơ bản.</p>
+    </article>
+
+    <article class="card">
+      <span class="tag">B1 · Intermediate</span>
+      <h2>Xây dựng tính độc lập</h2>
+      <ul>
+        <li>Present Perfect, các loại câu điều kiện cơ bản và mệnh đề quan hệ.</li>
+        <li>Từ vựng về giáo dục, công việc, công nghệ và các vấn đề xã hội.</li>
+        <li>Viết đoạn văn có giải thích, lý do và ví dụ.</li>
+        <li>Nhận diện lỗi về thì, giới từ và cấu trúc câu.</li>
+      </ul>
+      <p><strong>Mục tiêu:</strong> Hiểu các ý chính và trình bày quan điểm về chủ đề quen thuộc.</p>
+    </article>
+
+    <article class="card">
+      <span class="tag">B2 · Upper Intermediate</span>
+      <h2>Diễn đạt rõ ràng, sâu hơn</h2>
+      <ul>
+        <li>Câu bị động, câu điều kiện nâng cao và cấu trúc tường thuật.</li>
+        <li>Collocations, phrasal verbs và từ vựng học thuật.</li>
+        <li>Viết bài luận có luận điểm, lập luận và dẫn chứng.</li>
+        <li>Phân tích lỗi về sắc thái nghĩa, tính mạch lạc và cách dùng từ.</li>
+      </ul>
+      <p><strong>Mục tiêu:</strong> Hiểu nội dung tương đối phức tạp và trình bày quan điểm có lập luận.</p>
+    </article>
+
+    <article class="card">
+      <span class="tag">C1 · Advanced</span>
+      <h2>Phát triển sự linh hoạt</h2>
+      <ul>
+        <li>Đảo ngữ, câu điều kiện hỗn hợp và cấu trúc nhấn mạnh.</li>
+        <li>Từ vựng học thuật, sắc thái nghĩa và cách kết hợp từ tinh tế.</li>
+        <li>Đọc văn bản dài, tổng hợp thông tin và viết lập luận có chiều sâu.</li>
+        <li>Chỉnh sửa lỗi về văn phong, độ chính xác và tính tự nhiên.</li>
+      </ul>
+      <p><strong>Mục tiêu:</strong> Sử dụng tiếng Anh linh hoạt trong học tập và nhiều tình huống phức tạp.</p>
+    </article>
+
+    <article class="card">
+      <span class="tag">C2 · Proficient</span>
+      <h2>Hướng tới độ chính xác cao</h2>
+      <ul>
+        <li>Ôn luyện các cấu trúc ngữ pháp phức tạp và ít gặp.</li>
+        <li>Phân biệt sắc thái, hàm ý, thành ngữ và cách diễn đạt theo ngữ cảnh.</li>
+        <li>Phân tích, tổng hợp và diễn đạt lại các nguồn thông tin khó.</li>
+        <li>Biên tập văn bản để tăng độ chính xác, mạch lạc và phù hợp văn phong.</li>
+      </ul>
+      <p><strong>Mục tiêu:</strong> Hiểu gần như toàn bộ nội dung khó và diễn đạt chính xác, tinh tế.</p>
+    </article>
+  </section>
+
+  <section class="tip">
+    <h2>💡 Cách sử dụng lộ trình</h2>
+    <ol>
+      <li>Làm bài ở Grammar Lab và Vocabulary Lab để xác định nội dung cần ôn.</li>
+      <li>Học từng chủ điểm, làm bài tập và đọc phần giải thích sau mỗi câu.</li>
+      <li>Dùng Error Fix để luyện nhận diện và sửa lỗi trong câu tiếng Anh.</li>
+      <li>Mở Progress để xem số câu đã luyện và độ chính xác được ghi nhận.</li>
+      <li>Chuyển sang chủ điểm khó hơn khi đã nắm vững kiến thức hiện tại.</li>
+    </ol>
+    <p><strong>Lưu ý:</strong> Đây là lộ trình tổng quát, không phải bài kiểm tra xác định trình độ chính thức. Danh sách chủ điểm sẽ cần được bổ sung để bao phủ đầy đủ A1–C2.</p>
+  </section>
+
+  <div class="levels">
+    <a class="btn" href="grammar.html">Go to Grammar Lab</a>
+    <a class="btn" href="vocabulary.html">Go to Vocabulary Lab</a>
+    <a class="btn" href="progress.html">View My Progress</a>
+  </div>
+</main>
+
+<script>
+const mode = document.getElementById("mode");
+mode.addEventListener("click", () => {
+  const enabled = document.body.classList.toggle("accessible");
+  mode.setAttribute("aria-pressed", String(enabled));
+  mode.textContent = enabled ? "Normal Mode" : "Accessible Mode";
+});
+</script>
+</body>
+</html>
