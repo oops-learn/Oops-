@@ -293,6 +293,30 @@ body.accessible a {
 </form>
 <p id="feedback" role="status" aria-live="polite"></p>
 </section>
+
+<section class="card" id="error-fix">
+  <h2>Error Fix — Check Your English</h2>
+  <p>
+    Enter an English sentence to check its grammar and get an explanation.
+  </p>
+
+  <form id="error-check-form">
+    <label for="sentence-input">Your English sentence</label>
+    <textarea
+      id="sentence-input"
+      name="sentence"
+      rows="5"
+      placeholder="Example: She go to school every day."
+      required
+    ></textarea>
+
+    <button type="submit">Check my sentence</button>
+  </form>
+
+  <div id="error-check-result" role="status" aria-live="polite">
+    Your result and explanation will appear here.
+  </div>
+</section>
 </main>
 <footer>Oops! — Make mistakes. Make progress.</footer>
 <script>
