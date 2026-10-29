@@ -52,12 +52,19 @@ footer{text-align:center;padding:25px}
 
   <label for="grammar-level">Choose your level</label>
   <select id="grammar-level">
+  <option value="A1">A1 — Beginner</option>
+  <option value="A2">A2 — Elementary</option>
+  <option value="B1">B1 — Intermediate</option>
+  <option value="B2">B2 — Upper-intermediate</option>
+  <option value="C1">C1 — Advanced</option>
+  <option value="C2">C2 — Proficiency</option>
+</select>
     <option value="A1">A1 — Beginner</option>
     <option value="A2">A2 — Elementary</option>
   </select>
 
   <label for="grammar-topic">Choose a topic</label>
-  <select id="grammar-topic">
+  <select id="grammar-topic"></select>
     <option value="present-simple">Present Simple</option>
     <option value="present-continuous">Present Continuous</option>
   </select>
@@ -100,46 +107,372 @@ document.getElementById("feedback").textContent=answer==="b"
 ?"Correct! With she, use goes in the present simple."
 :"Not quite. The correct answer is: She goes to school every day.";
 });
+
 const grammarTopic = document.getElementById("grammar-topic");
 const grammarLesson = document.getElementById("grammar-lesson");
 const grammarLevel = document.getElementById("grammar-level");
 
-const grammarLessons = {
-  "present-simple": {
-    title: "Present Simple",
-    use: "Habits, routines and general facts.",
-    form: "Positive: Subject + base verb. Add -s/-es with he, she or it.",
+const grammarLessons = [
+  {
+    level: "A1", title: "Present Simple",
+    use: "Thói quen, lịch trình và sự thật hiển nhiên.",
+    form: "S + V(s/es). Với câu phủ định và nghi vấn, dùng do/does.",
     example: "She goes to school every day.",
-    mistake: "She go to school.",
-    tip: "Remember to add -s or -es after he, she and it."
+    mistake: "She go to school every day.",
+    tip: "He, she, it đi với động từ thêm -s/-es ở câu khẳng định.",
+    question: "Choose the correct sentence.",
+    options: ["He play football.", "He plays football.", "He playing football."],
+    answer: 1, explanation: "He là ngôi thứ ba số ít nên play đổi thành plays."
   },
-  "present-continuous": {
-    title: "Present Continuous",
-    use: "Actions happening now or around the present time.",
-    form: "Subject + am/is/are + verb-ing.",
+  {
+    level: "A1", title: "Present Continuous",
+    use: "Hành động đang diễn ra ở hiện tại.",
+    form: "S + am/is/are + V-ing.",
     example: "They are studying English now.",
     mistake: "They studying English now.",
-    tip: "Do not forget am, is or are before the -ing verb."
+    tip: "Không bỏ am, is hoặc are trước động từ -ing.",
+    question: "Choose the correct sentence.",
+    options: ["I am reading now.", "I reading now.", "I is reading now."],
+    answer: 0, explanation: "Với chủ ngữ I, dùng am + V-ing."
+  },
+  {
+    level: "A1", title: "Pronouns and Possessive Adjectives",
+    use: "Đại từ nhân xưng và tính từ sở hữu.",
+    form: "I–my; you–your; he–his; she–her; it–its; we–our; they–their.",
+    example: "This is my book. She likes her school.",
+    mistake: "He is my friend. I like he.",
+    tip: "Sau động từ cần tân ngữ như me, him, her, us, them.",
+    question: "This is Anna. ___ is my friend.",
+    options: ["Her", "She", "Hers"],
+    answer: 1, explanation: "She là đại từ chủ ngữ đứng trước động từ is."
+  },
+  {
+    level: "A1", title: "There is / There are",
+    use: "Nói có người hoặc vật ở đâu đó.",
+    form: "There is + danh từ số ít/không đếm được; There are + danh từ số nhiều.",
+    example: "There are three books on the desk.",
+    mistake: "There is three books on the desk.",
+    tip: "Chọn is/are theo danh từ đứng sau.",
+    question: "___ two windows in my room.",
+    options: ["There is", "There are", "There am"],
+    answer: 1, explanation: "Two windows là danh từ số nhiều nên dùng There are."
+  },
+  {
+    level: "A1", title: "Articles: a / an",
+    use: "Dùng trước danh từ đếm được số ít khi nhắc đến chung hoặc lần đầu.",
+    form: "a + âm phụ âm; an + âm nguyên âm.",
+    example: "a book; an apple; an hour.",
+    mistake: "a apple",
+    tip: "Chọn theo âm đầu, không chỉ theo chữ cái đầu.",
+    question: "She has ___ umbrella.",
+    options: ["a", "an", "the"],
+    answer: 1, explanation: "Umbrella bắt đầu bằng âm nguyên âm nên dùng an."
+  },
+  {
+    level: "A2", title: "Past Simple",
+    use: "Hành động đã xảy ra và kết thúc trong quá khứ.",
+    form: "S + V2/ed; phủ định: did not + V nguyên mẫu.",
+    example: "We visited Hue last summer.",
+    mistake: "We didn't visited Hue.",
+    tip: "Sau did/didn't, động từ trở về nguyên mẫu.",
+    question: "Yesterday, she ___ to school.",
+    options: ["go", "went", "goes"],
+    answer: 1, explanation: "Yesterday chỉ thời gian quá khứ; go có dạng quá khứ là went."
+  },
+  {
+    level: "A2", title: "Countable and Uncountable Nouns",
+    use: "Phân biệt danh từ đếm được và không đếm được.",
+    form: "many/few + danh từ đếm được; much/little + danh từ không đếm được.",
+    example: "many books; much water.",
+    mistake: "many information",
+    tip: "Information thường không đếm được trong tiếng Anh.",
+    question: "How ___ water do you need?",
+    options: ["many", "much", "few"],
+    answer: 1, explanation: "Water là danh từ không đếm được nên dùng much."
+  },
+  {
+    level: "A2", title: "Comparatives and Superlatives",
+    use: "So sánh hơn và so sánh nhất.",
+    form: "Tính từ ngắn: -er/-est; tính từ dài: more/most.",
+    example: "Mai is taller than Lan. Tom is the tallest boy.",
+    mistake: "more taller",
+    tip: "Không dùng đồng thời more và -er cho cùng một tính từ.",
+    question: "This book is ___ than that one.",
+    options: ["interesting", "more interesting", "most interesting"],
+    answer: 1, explanation: "Interesting là tính từ dài; so sánh hơn dùng more interesting."
+  },
+  {
+    level: "A2", title: "Future: will and be going to",
+    use: "Will thường diễn tả quyết định tức thời, dự đoán; be going to thường diễn tả dự định hoặc dự đoán có căn cứ.",
+    form: "will + V; am/is/are going to + V.",
+    example: "Look at those clouds! It is going to rain.",
+    mistake: "It is going to raining.",
+    tip: "Sau going to dùng động từ nguyên mẫu.",
+    question: "I have decided. I ___ study medicine.",
+    options: ["am going to", "am going", "going to"],
+    answer: 0, explanation: "Dự định đã có trước đó có thể dùng am going to + study."
+  },
+  {
+    level: "A2", title: "Modal Verbs: can, must, should",
+    use: "Diễn đạt khả năng, nghĩa vụ và lời khuyên.",
+    form: "Modal verb + động từ nguyên mẫu không to.",
+    example: "You should get enough sleep.",
+    mistake: "You should to sleep early.",
+    tip: "Không thêm to sau should, must hoặc can.",
+    question: "You ___ wear a seat belt.",
+    options: ["should to", "should", "should wearing"],
+    answer: 1, explanation: "Should đi trực tiếp với động từ nguyên mẫu wear."
+  },
+  {
+    level: "B1", title: "Present Perfect",
+    use: "Kinh nghiệm, kết quả hiện tại hoặc hành động kéo dài đến hiện tại.",
+    form: "S + have/has + V3.",
+    example: "I have lived here for five years.",
+    mistake: "I have live here for five years.",
+    tip: "Sau have/has dùng quá khứ phân từ (V3).",
+    question: "She has never ___ to Japan.",
+    options: ["be", "went", "been"],
+    answer: 2, explanation: "Cấu trúc hiện tại hoàn thành cần V3; be có V3 là been."
+  },
+  {
+    level: "B1", title: "First and Second Conditionals",
+    use: "Câu điều kiện loại 1 nói về khả năng có thật; loại 2 nói về giả định không có thật hoặc khó xảy ra ở hiện tại.",
+    form: "Type 1: If + present simple, will + V. Type 2: If + past simple, would + V.",
+    example: "If it rains, we will stay home. If I had time, I would travel.",
+    mistake: "If it will rain, we will stay home.",
+    tip: "Trong mệnh đề if của loại 1, thông thường dùng hiện tại đơn.",
+    question: "If I ___ rich, I would travel the world.",
+    options: ["am", "were", "will be"],
+    answer: 1, explanation: "Câu điều kiện loại 2 dùng quá khứ đơn; were thường được dùng trong giả định trang trọng."
+  },
+  {
+    level: "B1", title: "Passive Voice",
+    use: "Nhấn mạnh hành động hoặc đối tượng chịu tác động.",
+    form: "S + be + V3; thì của be thay đổi theo câu gốc.",
+    example: "The bridge was built in 2010.",
+    mistake: "The bridge was build in 2010.",
+    tip: "Sau be trong câu bị động dùng V3.",
+    question: "English ___ in many countries.",
+    options: ["speaks", "is spoken", "is speaking"],
+    answer: 1, explanation: "English là đối tượng được nói; dùng hiện tại đơn bị động is spoken."
+  },
+  {
+    level: "B1", title: "Relative Clauses",
+    use: "Bổ sung thông tin cho danh từ.",
+    form: "who: người; which: vật; that: người/vật trong mệnh đề xác định; whose: sở hữu.",
+    example: "The girl who won the prize is my friend.",
+    mistake: "The girl which won the prize...",
+    tip: "Who thường dùng để chỉ người.",
+    question: "The man ___ lives next door is a doctor.",
+    options: ["who", "where", "whose"],
+    answer: 0, explanation: "Who thay cho the man và làm chủ ngữ của mệnh đề quan hệ."
+  },
+  {
+    level: "B1", title: "Reported Speech",
+    use: "Thuật lại lời nói của người khác.",
+    form: "Câu tường thuật thường đổi đại từ, thời và từ chỉ thời gian/nơi chốn theo ngữ cảnh.",
+    example: 'She said, "I am tired." → She said (that) she was tired.',
+    mistake: 'She said that "I am tired."',
+    tip: "Không phải trường hợp nào cũng lùi thì; cần xét thời điểm và sự thật còn đúng hay không.",
+    question: 'Tom said, "I am busy." → Tom said that he ___ busy.',
+    options: ["is", "was", "be"],
+    answer: 1, explanation: "Trong cách tường thuật thông thường ở quá khứ, am chuyển thành was."
+  },
+  {
+    level: "B2", title: "Mixed Conditionals",
+    use: "Kết hợp điều kiện quá khứ với kết quả hiện tại hoặc ngược lại.",
+    form: "If + past perfect, would + V (kết quả hiện tại) là một mẫu phổ biến.",
+    example: "If I had studied medicine, I would be a doctor now.",
+    mistake: "If I had studied medicine, I would have been a doctor now. (không phù hợp nếu muốn nói kết quả hiện tại)",
+    tip: "Xác định thời gian của điều kiện và thời gian của kết quả.",
+    question: "If she had left earlier, she ___ here now.",
+    options: ["would be", "would have been", "will be"],
+    answer: 0, explanation: "Điều kiện ở quá khứ nhưng kết quả ở hiện tại nên dùng would be."
+  },
+  {
+    level: "B2", title: "Inversion for Emphasis",
+    use: "Đảo trợ động từ lên trước chủ ngữ để nhấn mạnh, thường sau trạng từ phủ định.",
+    form: "Never/Rarely/Seldom + auxiliary + subject + verb.",
+    example: "Never have I seen such a beautiful view.",
+    mistake: "Never I have seen such a beautiful view.",
+    tip: "Sau trạng từ phủ định đầu câu, dùng trật tự đảo ngữ.",
+    question: "Rarely ___ such dedication.",
+    options: ["we see", "do we see", "we do see"],
+    answer: 1, explanation: "Rarely ở đầu câu yêu cầu đảo trợ động từ do trước chủ ngữ we."
+  },
+  {
+    level: "B2", title: "Cleft Sentences",
+    use: "Nhấn mạnh một thành phần trong câu.",
+    form: "It is/was + phần nhấn mạnh + that/who + phần còn lại.",
+    example: "It was Anna who found the key.",
+    mistake: "It was Anna which found the key.",
+    tip: "Who thường dùng cho người trong cấu trúc nhấn mạnh này.",
+    question: "___ John who solved the problem.",
+    options: ["It was", "There was", "What was"],
+    answer: 0, explanation: "Cấu trúc nhấn mạnh phổ biến là It was + thành phần nhấn mạnh + who/that."
+  },
+  {
+    level: "B2", title: "Participle Clauses",
+    use: "Rút gọn mệnh đề trạng ngữ khi chủ thể và quan hệ ý nghĩa phù hợp.",
+    form: "V-ing thường mang nghĩa chủ động; V3 thường mang nghĩa bị động.",
+    example: "Walking home, I saw an old friend.",
+    mistake: "Walking home, the rain started. (chủ thể gây hiểu nhầm)",
+    tip: "Chủ thể ngầm của phân từ cần phù hợp với chủ ngữ mệnh đề chính.",
+    question: "___ by the news, she called her family.",
+    options: ["Shocking", "Shocked", "Shock"],
+    answer: 1, explanation: "She là người cảm thấy sốc nên dùng phân từ mang nghĩa bị động/cảm xúc shocked."
+  },
+  {
+    level: "C1", title: "Advanced Modal Perfects",
+    use: "Suy đoán, phê bình hoặc đánh giá về sự việc trong quá khứ.",
+    form: "must/might/could/should + have + V3.",
+    example: "You should have checked the figures.",
+    mistake: "You should have check the figures.",
+    tip: "Sau have trong cấu trúc này dùng V3.",
+    question: "He isn't here. He ___ missed the train.",
+    options: ["might have", "might has", "might had"],
+    answer: 0, explanation: "Might have + V3 diễn tả khả năng đã xảy ra trong quá khứ."
+  },
+  {
+    level: "C1", title: "Advanced Hedging",
+    use: "Làm cho nhận định thận trọng, phù hợp với văn phong học thuật.",
+    form: "It appears that...; The evidence suggests that...; This may indicate...",
+    example: "The findings appear to suggest a correlation.",
+    mistake: "The findings prove this is always true. (khẳng định quá mức khi chứng cứ chưa đủ)",
+    tip: "Mức độ chắc chắn của ngôn ngữ cần tương xứng với bằng chứng.",
+    question: "Which phrase expresses a cautious claim?",
+    options: ["This unquestionably proves...", "The evidence may suggest...", "It is always certain that..."],
+    answer: 1, explanation: "May suggest thể hiện sự thận trọng thay vì khẳng định tuyệt đối."
+  },
+  {
+    level: "C1", title: "Advanced Subjunctive",
+    use: "Thường xuất hiện trong đề nghị, yêu cầu hoặc văn phong trang trọng.",
+    form: "suggest/recommend/insist that + subject + base verb (trong cấu trúc giả định phù hợp).",
+    example: "The committee recommended that he be appointed.",
+    mistake: "The committee recommended that he is appointed. (trong cấu trúc giả định trang trọng)",
+    tip: "Động từ nguyên mẫu có thể dùng sau that trong subjunctive trang trọng.",
+    question: "They insisted that she ___ informed immediately.",
+    options: ["is", "be", "was"],
+    answer: 1, explanation: "Trong cấu trúc giả định trang trọng ở thể bị động, dùng be + V3."
+  },
+  {
+    level: "C1", title: "Ellipsis and Substitution",
+    use: "Lược bỏ phần đã rõ hoặc thay thế để tránh lặp từ.",
+    form: "Dùng do so, one/ones, so/not và lược bỏ thành phần khi ngữ cảnh đủ rõ.",
+    example: "She said she would help, and she did so.",
+    mistake: "He likes the red shirt, and I like the red shirt too. (lặp không cần thiết trong ngữ cảnh phù hợp)",
+    tip: "Lựa chọn cấu trúc thay thế phụ thuộc vào phần được thay và văn cảnh.",
+    question: "She promised to call, and she ___ .",
+    options: ["did so", "did it so", "so did"],
+    answer: 0, explanation: "Did so thay cho hành động đã được nhắc đến là promised to call."
+  },
+  {
+    level: "C2", title: "Advanced Information Structure",
+    use: "Sắp xếp thông tin để tạo trọng tâm, tương phản hoặc mạch lập luận rõ ràng.",
+    form: "Có thể dùng fronting, clefting và cấu trúc tương phản; cần xét văn cảnh và sắc thái.",
+    example: "What matters most is how the evidence is interpreted.",
+    mistake: "Dùng đảo ngữ hoặc nhấn mạnh liên tục khiến văn bản thiếu tự nhiên.",
+    tip: "Cấu trúc nâng cao chỉ hiệu quả khi phục vụ mục đích giao tiếp.",
+    question: "Which sentence most naturally emphasizes the main issue?",
+    options: ["What matters is the evidence.", "The evidence what matters is.", "Is what matters the evidence."],
+    answer: 0, explanation: "What matters is... là cấu trúc nhấn mạnh tự nhiên và đúng ngữ pháp."
+  },
+  {
+    level: "C2", title: "Register and Grammatical Nuance",
+    use: "Lựa chọn cấu trúc theo mức độ trang trọng, mục đích và sắc thái.",
+    form: "So sánh cách diễn đạt trực tiếp, giảm nhẹ, trang trọng và thân mật theo ngữ cảnh.",
+    example: "Would you mind clarifying this point? (lịch sự) / Clarify this point. (trực tiếp)",
+    mistake: "Dùng câu mệnh lệnh trực tiếp trong mọi tình huống giao tiếp.",
+    tip: "Đúng ngữ pháp chưa đủ; cần phù hợp người nghe và tình huống.",
+    question: "Which request is generally more polite?",
+    options: ["Explain this now.", "Would you mind explaining this?", "You explain this."],
+    answer: 1, explanation: "Would you mind + V-ing thường được dùng để đưa ra yêu cầu lịch sự."
+  },
+  {
+    level: "C2", title: "Complex Syntax and Ambiguity",
+    use: "Kiểm soát mệnh đề lồng nhau, quan hệ bổ nghĩa và tính rõ nghĩa trong câu phức.",
+    form: "Đặt mệnh đề bổ nghĩa gần thành phần được bổ nghĩa; kiểm tra chủ thể, phạm vi và quan hệ logic.",
+    example: "The report that the committee published yesterday was revised.",
+    mistake: "The report was revised that the committee published yesterday.",
+    tip: "Câu dài cần rõ quan hệ giữa các mệnh đề, không chỉ cần nhiều cấu trúc phức.",
+    question: "Which sentence places the relative clause correctly?",
+    options: ["The book that I borrowed is useful.", "The book is useful that I borrowed.", "That I borrowed the book is useful. (khác nghĩa)"],
+    answer: 0, explanation: "Mệnh đề quan hệ that I borrowed đứng ngay sau danh từ the book."
   }
-};
+];
+
+function renderGrammarTopics() {
+  const level = grammarLevel.value;
+  const lessons = grammarLessons.filter(item => item.level === level);
+
+  grammarTopic.innerHTML = "";
+
+  lessons.forEach((lesson, index) => {
+    const option = document.createElement("option");
+    option.value = String(index);
+    option.textContent = lesson.title;
+    grammarTopic.appendChild(option);
+  });
+
+  renderGrammarLesson();
+}
 
 function renderGrammarLesson() {
-  const lesson = grammarLessons[grammarTopic.value];
+  const lessons = grammarLessons.filter(
+    item => item.level === grammarLevel.value
+  );
+  const lesson = lessons[Number(grammarTopic.value)];
+
+  if (!lesson) {
+    grammarLesson.textContent = "Chưa có bài học ở cấp độ này.";
+    return;
+  }
 
   grammarLesson.innerHTML = `
     <h4>${lesson.title}</h4>
-    <p><strong>Level:</strong> ${grammarLevel.value}</p>
-    <p><strong>Use:</strong> ${lesson.use}</p>
-    <p><strong>Form:</strong> ${lesson.form}</p>
-    <p><strong>Example:</strong> ${lesson.example}</p>
-    <p><strong>Common mistake:</strong> ${lesson.mistake}</p>
-    <p><strong>Remember:</strong> ${lesson.tip}</p>
+    <p><strong>Level:</strong> ${lesson.level}</p>
+    <p><strong>Use / Cách dùng:</strong> ${lesson.use}</p>
+    <p><strong>Form / Cấu trúc:</strong> ${lesson.form}</p>
+    <p><strong>Example / Ví dụ:</strong> ${lesson.example}</p>
+    <p><strong>Common mistake / Lỗi thường gặp:</strong> ${lesson.mistake}</p>
+    <p><strong>Remember / Ghi nhớ:</strong> ${lesson.tip}</p>
+    <hr>
+    <h4>Practice / Luyện tập</h4>
+    <p>${lesson.question}</p>
+    <form id="grammar-quiz">
+      ${lesson.options.map((option, index) => `
+        <label>
+          <input type="radio" name="grammar-answer" value="${index}" required>
+          ${option}
+        </label>
+      `).join("")}
+      <button type="submit">Check answer / Kiểm tra</button>
+    </form>
+    <p id="grammar-feedback" role="status" aria-live="polite"></p>
   `;
+
+  document.getElementById("grammar-quiz").addEventListener("submit", event => {
+    event.preventDefault();
+    const chosen = Number(
+      new FormData(event.currentTarget).get("grammar-answer")
+    );
+    const feedback = document.getElementById("grammar-feedback");
+
+    if (chosen === lesson.answer) {
+      feedback.textContent = "Correct! / Chính xác! " + lesson.explanation;
+    } else {
+      feedback.textContent =
+        "Not quite. / Chưa đúng. " +
+        "Đáp án đúng: " + lesson.options[lesson.answer] + ". " +
+        lesson.explanation;
+    }
+  });
 }
 
+grammarLevel.addEventListener("change", renderGrammarTopics);
 grammarTopic.addEventListener("change", renderGrammarLesson);
-grammarLevel.addEventListener("change", renderGrammarLesson);
-renderGrammarLesson();
+renderGrammarTopics();
+
 </script>
 </body>
 </html>
