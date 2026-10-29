@@ -1035,36 +1035,88 @@ Object.keys(advancedCurriculum).forEach(level => {
       renderQuestions();
     }
 
-    function renderQuestions() {
-      questions.innerHTML = "";
-      results.hidden = true;
+  
+function renderQuestions() {
+  questions.innerHTML = "";
+  results.hidden = true;
 
-      currentLesson.questions.forEach((q, qi) => {
-        const section = document.createElement("fieldset");
-        section.className = "question";
-        const legend = document.createElement("legend");
-        legend.textContent = `${qi + 1}. ${q.text}`;
-        section.appendChild(legend);
+  currentLesson.questions.forEach((q, qi) => {
+    const section = document.createElement("fieldset");
+    section.className = "question";
 
-        const answers = document.createElement("div");
-        answers.className = "answers";
+    const legend = document.createElement("legend");
+    legend.textContent = `${qi + 1}. ${q.text}`;
+    section.appendChild(legend);
 
-        q.options.forEach((optionText, oi) => {
-          const label = document.createElement("label");
-          label.className = "answer";
-          const radio = document.createElement("input");
-          radio.type = "radio";
-          radio.name = `q${qi}`;
-          radio.value = String(oi);
-          radio.required = true;
-          label.append(radio, document.createTextNode(optionText));
-          answers.appendChild(label);
-        });
+    const answers = document.createElement("div");
+    answers.className = "answers";
 
-        section.appendChild(answers);
-        questions.appendChild(section);
-      });
+    q.options.forEach((optionText, oi) => {
+      const label = document.createElement("label");
+      label.className = "answer";
+
+      const radio = document.createElement("input");
+      radio.type = "radio";
+      radio.name = `q${qi}`;
+      radio.value = String(oi);
+      radio.required = true;
+
+      label.append(radio, document.createTextNode(" " + optionText));
+      answers.appendChild(label);
+    });
+
+    const feedback = document.createElement("p");
+    feedback.className = "question-feedback";
+    feedback.hidden = true;
+    feedback.setAttribute("aria-live", "polite");
+
+    section.append(answers, feedback);
+    questions.appendChild(section);
+  });
+}
+
+function checkGrammarAnswers() {
+  let score = 0;
+  let answered = 0;
+
+  currentLesson.questions.forEach((q, qi) => {
+    const section = questions.children[qi];
+    const selected = section.querySelector(
+      `input[name="q${qi}"]:checked`
+    );
+    const feedback = section.querySelector(".question-feedback");
+
+    feedback.hidden = false;
+    section.classList.remove("correct", "incorrect");
+
+    if (!selected) {
+      feedback.textContent =
+        `Not answered. Correct answer: ${q.options[q.answer]}. ${q.why}`;
+      section.classList.add("incorrect");
+      return;
     }
+
+    answered++;
+    const isCorrect = Number(selected.value) === q.answer;
+
+    if (isCorrect) {
+      score++;
+      section.classList.add("correct");
+      feedback.textContent = `Correct! ${q.why}`;
+    } else {
+      section.classList.add("incorrect");
+      feedback.textContent =
+        `Not quite. Correct answer: ${q.options[q.answer]}. ${q.why}`;
+    }
+  });
+
+  results.hidden = false;
+  results.textContent =
+    `Your score: ${score}/${currentLesson.questions.length}. ` +
+    `Answered: ${answered}/${currentLesson.questions.length}.`;
+
+  results.setAttribute("role", "status");
+}
 
     levelSelect.addEventListener("change", renderTopics);
     topicSelect.addEventListener("change", renderLesson);
