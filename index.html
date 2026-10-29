@@ -206,47 +206,28 @@ body.accessible a {
 }
 
 @media (max-width: 600px) {
-  header {
-    padding: 14px 18px;
-  }
-
-  .logo {
-    font-size: 26px;
-  }
-
-  main {
-    padding: 22px 16px;
-  }
-
-  .hero {
-    border-radius: 18px;
-  }
-
-  .card {
-    padding: 18px;
-  }
-
-  button {
-    max-width: 100%;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    scroll-behavior: auto !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-</style>
-
-</head>
-<body>
-<a class="skip" href="#main">Skip to main content</a>
+ 
 <header>
-<a href="#home" style="color:inherit;text-decoration:none"><span class="logo">Oops!</span></a>
-<button id="mode" type="button" aria-pressed="false">Switch to Accessible Mode</button>
+  <a class="logo" href="#home" aria-label="Oops! - Trang chủ"
+     style="text-decoration:none;">Oops!</a>
+
+  <nav aria-label="Điều hướng chính"
+       style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+    <a href="#home">Trang chủ</a>
+    <a href="#error-fix">Error Fix</a>
+    <a href="#grammar">Ngữ pháp</a>
+    <a href="#vocabulary">Từ vựng</a>
+    <a href="#progress">Tiến độ</a>
+    <a href="#roadmap">Lộ trình</a>
+    <button type="button" id="customizeBtn"
+            onclick="document.getElementById('customizePanel').hidden = !document.getElementById('customizePanel').hidden">
+      Customize
+    </button>
+    <button type="button" id="accessibilityBtn"
+            onclick="document.body.classList.toggle('accessible')">
+      Accessible Mode
+    </button>
+  </nav>
 </header>
 <main id="main">
 <section class="hero" id="home">
