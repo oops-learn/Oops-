@@ -385,11 +385,21 @@
 </head>
 <body>
 <header>
-<a class="logo" href="index.html">Oops!</a>
-<a href="index.html">← Back to Home</a>
-<button class="primary" id="modeBtn" type="button" aria-pressed="false">Switch to Accessible Mode</button>
-</header>
+  <a class="logo" href="index.html">Oops!</a>
 
+  <nav aria-label="Main navigation">
+    <a href="index.html">Home</a>
+    <a href="error-fix.html">Error Fix</a>
+    <a href="grammar.html">Grammar</a>
+    <a href="vocabulary.html" aria-current="page">Vocabulary</a>
+    <a href="roadmap.html">Learning Path</a>
+    <a href="progress.html">My Progress</a>
+  </nav>
+
+  <button class="primary" id="modeBtn" type="button" aria-pressed="false">
+    Switch to Accessible Mode
+  </button>
+</header>
 <main>
 <section class="hero">
 <div class="eyebrow">OOPS! LEARNING SPACE</div>
